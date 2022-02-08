@@ -55,26 +55,10 @@ describe('Test Edit Product function', () => {
             category: "clothing",
             image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
         }
-        const productList=[
-            {
-                id: 1,
-                name: "first",
-                price: 10.15,
-                category: "clothing",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            },
-            {
-                id: 2,
-                name: "second",
-                price: 20,
-                category: "Games",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            }   
-        ]
-        const actual=editProduct(productList,1,editedProduct)
+
+        const actual=editProduct(1,editedProduct)
         const expected=[
             {
-            
                 id: 1,
                 name: "T-shirt",
                 price: 10.15,
@@ -90,8 +74,6 @@ describe('Test Edit Product function', () => {
             }  
         ]
         expect(actual).toEqual(expected);
-
-      
     })
 
     test('edit price and image for product ', () => {
@@ -102,23 +84,7 @@ describe('Test Edit Product function', () => {
             category: "clothing",
             image: "https://fakestoreapi.com/images/81fPKd-2AYL._AC_SL1500_.jpg",
         }
-        const productList=[
-            {
-                id: 1,
-                name: "first",
-                price: 10.15,
-                category: "clothing",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            },
-            {
-                id: 2,
-                name: "second",
-                price: 20,
-                category: "Games",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            }   
-        ]
-        const actual=editProduct(productList,1,editedProduct)
+        const actual=editProduct(1,editedProduct)
         const expected=[
             {
             
@@ -147,23 +113,7 @@ describe('Test Edit Product function', () => {
             category: "clothing",
             image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
         }
-        const productList=[
-            {
-                id: 1,
-                name: "first",
-                price: 10.15,
-                category: "clothing",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            },
-            {
-                id: 2,
-                name: "second",
-                price: 20,
-                category: "Games",
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-            }   
-        ]
-        const actual=editProduct(productList,1,editedProduct)
+        const actual=editProduct(1,editedProduct)
         const expected=[
             {
             
@@ -205,7 +155,7 @@ describe('Test search Product function', () => {
             }   
         ]
         const name="First"
-        const actual=searchProduct(productList,name)
+        const actual=searchProduct(name)
         const expected=[
             {
                 id: 1,
