@@ -8,7 +8,10 @@
 
 /* Root Variable */
 :root {
-    --bg-nav-bar: #ffffff;
+    --primary: #e55f34;
+    --background: #f8f8f8;
+    --secondary: #fef7f5;
+    --white: #ffffff;
 }
 
 /* ------------------------------------------------------------------
@@ -24,6 +27,10 @@
 
 html {
     scroll-behavior: smooth;
+    font-family: "Manrope", sans-serif;
+}
+body {
+    font-family: "Manrope", sans-serif;
 }
 
 p,
