@@ -144,18 +144,8 @@ button {
 /* START RESPONSIVE  */
 @media (max-width: 768px) {
     .cart-section {
-        position: fixed;
-        top: 20vh;
-        right: 0;
-        background-color: var(--background);
-        padding: 1em;
-        width: 30em;
-        height: 100vh !important;
-        color: var(--fontColor);
-    }
-
-    .cart-section {
         width: 20em;
+        top: 20vh;
     }
     .cart-section .content-cart .item {
         flex-direction: column;
@@ -195,13 +185,6 @@ button {
 
 @media (max-width: 500px) {
     .cart-section {
-        position: fixed;
         top: 10vh;
-        right: 0;
-        background-color: var(--background);
-        padding: 1em;
-        width: 30em;
-        height: 100vh !important;
-        color: var(--fontColor);
     }
 }
