@@ -1,12 +1,43 @@
-let productList=[];
+let beforeDeleteProductList = [
+    {
+        id: 1,
+        name: "first",
+        price: 10.15,
+        category: "clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    },
+    {
+        id: 2,
+        name: "first",
+        price: 10.15,
+        category: "clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    },
+];
+
+let productList = [];
 
 // logic For Add Products
 const addProduct = (newProduct) => {
-    productList.push(newProduct);
-    return productList;
+    if (newProduct == undefined) {
+        return productList;
+    } else {
+        return [...productList, newProduct];
+    }
 };
 
+// logic For Delete Products
+const deleteProduct = (indexProduct) => {
+    if (indexProduct == undefined) {
+        return beforeDeleteProductList;
+    } else {
+        beforeDeleteProductList.splice(indexProduct, 1);
+        return beforeDeleteProductList;
+    }
+};
 
 module.exports = {
     addProduct,
+    deleteProduct,
+    beforeDeleteProductList,
 };
