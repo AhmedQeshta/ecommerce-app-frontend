@@ -16,7 +16,7 @@ let beforeDeleteProductList = [
 ];
 
 let productList = [];
-let products=[
+let products = [
     {
         id: 1,
         name: "first",
@@ -30,8 +30,8 @@ let products=[
         price: 20,
         category: "Games",
         image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    }   
-]
+    },
+];
 
 // logic For Add Products
 const addProduct = (newProduct) => {
@@ -52,22 +52,32 @@ const deleteProduct = (indexProduct) => {
     }
 };
 //logic for edit product
-const editProduct = (i,editProduct) =>{
-    return products.map((product)=>{
-        if(product.id === i) {
-            return {...editProduct}
-        }else{
-            return product
+const editProduct = (i, editProduct) => {
+    return products.map((product) => {
+        if (product.id === i) {
+            return { ...editProduct };
+        } else {
+            return product;
         }
-    })  
-}
+    });
+};
 //logic for search product by name
-const searchProduct = (name) =>{
-    return products.filter((product)=>{
-        return product.name.toLowerCase() === name.toLowerCase()
-    })
-}
+const searchProduct = (name) => {
+    return products.filter((product) => {
+        return product.name.toLowerCase() === name.toLowerCase();
+    });
+};
 
+// logic For filter Products
+const filterProduct = (nameCategory) => {
+    if (nameCategory === "None" || nameCategory === undefined) {
+        return products;
+    } else {
+        return products.filter((product) => {
+            return product.category === nameCategory;
+        });
+    }
+};
 
 module.exports = {
     addProduct,
@@ -75,4 +85,5 @@ module.exports = {
     beforeDeleteProductList,
     editProduct,
     searchProduct,
+    filterProduct,
 };
