@@ -4,7 +4,7 @@ const navbarContent = document.getElementById("navbar-content");
 const btnCloseNav = document.getElementById("btn-close-navbar");
 const cartSection = document.getElementById("cart-section");
 const btnCloseCart = document.getElementById("btn-close-cart");
-const btnShowCart = document.getElementById("btn-show-cart");
+const btnShowCart = document.getElementById("btn-shopping-bag");
 
 // Function  close Modal
 closeModal.addEventListener("click", () => {
