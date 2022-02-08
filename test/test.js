@@ -2,6 +2,8 @@ const {
     addProduct,
     deleteProduct,
     beforeDeleteProductList,
+    editProduct,
+    searchProduct
 } = require("../js/logic");
 
 describe("Test Add Products", () => {
@@ -43,3 +45,126 @@ describe("Test Delete Products", () => {
         expect(deleteProduct(9)).toEqual(beforeDeleteProductList);
     });
 });
+
+describe('Test Edit Product function', () => {
+    test('edit name for product ', () => {
+        const editedProduct= {
+            id: 1,
+            name: "T-shirt",
+            price: 10.15,
+            category: "clothing",
+            image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        }
+
+        const actual=editProduct(1,editedProduct)
+        const expected=[
+            {
+                id: 1,
+                name: "T-shirt",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "second",
+                price: 20,
+                category: "Games",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            }  
+        ]
+        expect(actual).toEqual(expected);
+    })
+
+    test('edit price and image for product ', () => {
+        const editedProduct= {
+            id: 1,
+            name: "T-shirt",
+            price: 20,
+            category: "clothing",
+            image: "https://fakestoreapi.com/images/81fPKd-2AYL._AC_SL1500_.jpg",
+        }
+        const actual=editProduct(1,editedProduct)
+        const expected=[
+            {
+            
+                id: 1,
+                name: "T-shirt",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/images/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "second",
+                price: 20,
+                category: "Games",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            }  
+        ]
+        expect(actual).toEqual(expected);
+    })
+    
+    test('edit price for product ', () => {
+        const editedProduct= {
+            id: 1,
+            name: "T-shirt",
+            price: 30,
+            category: "clothing",
+            image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        }
+        const actual=editProduct(1,editedProduct)
+        const expected=[
+            {
+            
+                id: 1,
+                name: "T-shirt",
+                price: 30,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "second",
+                price: 20,
+                category: "Games",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            }  
+        ]
+        expect(actual).toEqual(expected);
+    })
+  
+})
+
+describe('Test search Product function', () => {
+    test('producst should be display that have name written ', () => {
+        const productList=[
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "second",
+                price: 20,
+                category: "Games",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            }   
+        ]
+        const name="First"
+        const actual=searchProduct(name)
+        const expected=[
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },  
+        ]
+        expect(actual).toEqual(expected);
+    })
+})
