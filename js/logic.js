@@ -36,19 +36,28 @@ const deleteProduct = (indexProduct) => {
     }
 };
 //logic for edit product
-const editProduct = (array,i,editProduct) =>{
-    return array.map((product)=>{
+const editProduct = (Products,i,editProduct) =>{
+    return Products.map((product)=>{
         if(product.id === i) {
             return {...product,...editProduct}
         }else{
             return product
         }
     })  
-    }
+}
+//logic for search product by name
+const searchProduct = (Products,name) =>{
+    return Products.filter((product)=>{
+        return product.name.toLowerCase() === name.toLowerCase()
+    })
+}
+
 
 module.exports = {
     addProduct,
     deleteProduct,
     beforeDeleteProductList,
-    editProduct
+    editProduct,
+    searchProduct
+
 };
