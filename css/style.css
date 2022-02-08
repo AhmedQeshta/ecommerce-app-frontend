@@ -1,0 +1,62 @@
+/* ------------------------------------------------------------------
+                          [Table of contents]
+         ***     01.  ===>   Root Variable    ***
+         ***     02.  ===>   Global Style    ***
+         ***     03.  ===>   Nav Bar Style    ***
+         ***     04.  ===>       ***
+--------------------------------------------------------------------- */
+
+/* Root Variable */
+:root {
+    --bg-nav-bar: #ffffff;
+}
+
+/* ------------------------------------------------------------------
+                    ***     Global Style        ***
+--------------------------------------------------------------------- */
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+p,
+div {
+    margin: 0;
+}
+
+li,
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+button:focus,
+input,
+input:focus textarea,
+textarea:focus {
+    outline: none;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------------
+                    ***     Nav Bar Style        ***
+--------------------------------------------------------------------- */
+
+
+

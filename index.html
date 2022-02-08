@@ -9,12 +9,35 @@
 
         <!-- style Css -->
         <link rel="stylesheet" href="css/style.css" />
+
         <!--Font Awesome And Fonts -->
+        <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous"
+        />
     </head>
     <body>
-
-
-        
+        <!-- nav bar -->
+        <nav class="navbar">
+            <div class="logo">
+                <img src="img/Logo.svg" alt="Logo Website">
+            </div>
+            <div class="navbar-content">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input id="search-input" type="text" class="search-input" placeholder="Search...">
+                </div>
+                <div class="btn-container">
+                    <button type="button" class="btn-buyer"id="btn-buyer">Buyer</button>
+                    <button type="button" class="btn-seller"id="btn-seller">Seller</button>
+                    <button type="button" class="btn-seller"id="btn-seller">
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
         <!-- Scripts JS -->
         <script src="js/logic.js"></script>
         <script src="js/app.js"></script>
