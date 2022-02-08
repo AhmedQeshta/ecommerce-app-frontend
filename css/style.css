@@ -174,7 +174,8 @@ img {
     background: var(--primary);
     border: 1px solid var(--primary);
 }
-.btn-buyer:hover {
+.btn-buyer:hover,
+.btn-buyer:focus {
     color: var(--primary);
     background: var(--white);
     border: 1px solid var(--primary);
@@ -185,7 +186,8 @@ img {
     background: var(--white);
     border: 1px solid var(--primary);
 }
-.btn-seller:hover {
+.btn-seller:hover,
+.btn-seller:focus {
     color: var(--white);
     background: var(--primary);
     border: 1px solid var(--primary);
@@ -217,6 +219,84 @@ img {
     border-radius: 50%;
     background-color: var(--primary);
     color: var(--white);
+}
+
+.fa-bars {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 5px;
+        height: 20vh;
+        padding: 0 25px;
+    }
+    .search-container {
+        flex: 80%;
+    }
+    .btn-container {
+        flex: 20%;
+    }
+
+    .btn-buyer,
+    .btn-seller {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+    .navbar-content {
+        flex: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .logo {
+        flex: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 10px;
+    }
+    .navbar {
+        flex-direction: row;
+        gap: 5px;
+        height: 10vh;
+        padding: 0 25px;
+        position: relative;
+    }
+    .fa-bars {
+        display: block;
+    }
+    .search-container {
+        flex: 100%;
+    }
+    .navbar-content {
+        width: 100%;
+        flex: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 25px;
+        position: absolute;
+        top: 10vh;
+        left: 0;
+        background-color: #fff;
+        z-index: 999;
+        padding: 30px 0;
+        transition: all 0.5s ease-in-out;
+        overflow: visible;
+        opacity: 1;
+    }
+
+    .navbar-hidden {
+        overflow: hidden;
+        opacity: 0;
+    }
 }
 
 /*  -------- media Query ------------- */

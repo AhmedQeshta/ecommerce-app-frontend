@@ -39,8 +39,9 @@
                     <img src="img/Logo.svg" alt="Logo Website"
                 /></a>
             </div>
+            <i class="fas fa-bars" id="btn-close-navbar"></i>
             <!-- navbar content -->
-            <div class="navbar-content">
+            <div id="navbar-content" class="navbar-content navbar-hidden">
                 <!-- navbar content -->
                 <div class="search-container">
                     <i class="far fa-search"></i>
@@ -64,18 +65,20 @@
                         id="btn-shopping-bag"
                     >
                         <span class="count-cart">4</span>
-                        <i class="far fa-shopping-bag"></i>
+                        <i id="btn-show-cart" class="far fa-shopping-bag"></i>
                     </button>
                 </div>
             </div>
         </nav>
 
         <!-- start cart section -->
-        <section class="cart-section">
+        <section id="cart-section" class="cart-section cart-hidden">
             <!-- start header cart -->
             <div class="header-cart">
                 <div>
-                    <button class="close"><i class="far fa-times"></i></button>
+                    <button id="btn-close-cart" class="close">
+                        <i class="far fa-times"></i>
+                    </button>
                     <span class="cart-name">Cart</span>
                     <span class="number-items">(5items)</span>
                 </div>
