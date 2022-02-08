@@ -1,0 +1,24 @@
+{
+  "name": "team-5-ecommerce-app",
+  "version": "1.0.0",
+  "description": "The main idea of this application is to help the user navigate and find all the products they desire in the comfort of their house the only requirement is an internet connection and a phone/computer as Buyer/Customer or Seller.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:w": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G11/team-5-ecommerce-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G11/team-5-ecommerce-app/issues"
+  },
+  "homepage": "https://github.com/GSG-G11/team-5-ecommerce-app#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
