@@ -35,9 +35,20 @@ const deleteProduct = (indexProduct) => {
         return beforeDeleteProductList;
     }
 };
+//logic for edit product
+const editProduct = (array,i,editProduct) =>{
+    return array.map((product)=>{
+        if(product.id === i) {
+            return {...product,...editProduct}
+        }else{
+            return product
+        }
+    })  
+    }
 
 module.exports = {
     addProduct,
     deleteProduct,
     beforeDeleteProductList,
+    editProduct
 };
