@@ -177,13 +177,13 @@ img {
 .btn-buyer:hover {
     color: var(--primary);
     background: var(--white);
-    border: 2px solid var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .btn-seller {
     color: var(--primary);
     background: var(--white);
-    border: 2px solid var(--primary);
+    border: 1px solid var(--primary);
 }
 .btn-seller:hover {
     color: var(--white);

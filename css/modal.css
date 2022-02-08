@@ -1,0 +1,241 @@
+/* ------------------------------------------------------------------
+                          [Table of contents]
+         ***     01.  ===>   Root Variable    ***
+         ***     02.  ===>   Global Style    ***
+         ***     03.  ===>   modules modal    ***
+         ***     04.  ===>       ***
+--------------------------------------------------------------------- */
+
+/* Root Variable */
+:root {
+    --primary: #e55f34;
+    --background: #f8f8f8;
+    --secondary: #fef7f5;
+    --white: #ffffff;
+}
+
+/* ------------------------------------------------------------------
+                    ***     Global Style        ***
+--------------------------------------------------------------------- */
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: "Manrope", sans-serif;
+}
+body {
+    font-family: "Manrope", sans-serif;
+}
+
+p,
+div {
+    margin: 0;
+}
+
+li,
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+button:focus,
+input,
+input:focus textarea,
+textarea:focus {
+    outline: none;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    /* width: 100%;
+    height: 100%; */
+    object-fit: cover;
+}
+
+/* ------------------------------------------------------------------
+                    ***    modules modal Style        ***
+--------------------------------------------------------------------- */
+.modal-starter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    transition: all 0.5s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-overview {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+}
+
+.modal-content {
+    background-color: var(--white);
+    position: absolute;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+    margin: 0 15px;
+}
+
+.modal-content .fa-times {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.modal-content .fa-times:hover {
+    border: 1px solid var(--primary);
+}
+
+.modal-img {
+    width: 100%;
+    height: 55vh;
+}
+
+.modal-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-title {
+    text-align: center;
+    margin: 15px auto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 41px;
+    color: #0d161d;
+}
+
+.modal-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    gap: 20px;
+}
+
+.btn-modal-buyer,
+.btn-modal-seller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 60px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0 5px;
+    font-family: "Manrope", sans-serif;
+    transition: all ease-in-out 0.5s;
+    color: var(--white);
+    background: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-modal-buyer:hover,
+.btn-modal-seller:hover {
+    color: var(--primary);
+    background: var(--white);
+    border: 1px solid var(--primary);
+}
+
+@media (max-width: 768px) {
+    .modal-content .fa-times {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .modal-img {
+        width: 100%;
+        height: 40vh;
+    }
+    .modal-img img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-title {
+        text-align: center;
+        margin: 10px auto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 21px;
+        color: #0d161d;
+    }
+    .btn-modal-buyer,
+    .btn-modal-seller {
+        padding: 7px 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content .fa-times {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .modal-img {
+        width: 100%;
+        height: 33vh;
+    }
+    .modal-img img {
+        width: 100%;
+        height: 90%;
+        padding: 0 30px;
+    }
+
+    .modal-title {
+        margin: 10px auto;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 18px;
+    }
+    .btn-modal-buyer,
+    .btn-modal-seller {
+        padding: 7px 40px;
+        font-size: 14px;
+    }
+}
