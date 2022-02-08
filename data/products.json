@@ -1,60 +1,60 @@
 [
     {
         "id": 1,
-        "name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        "name": "Fjallraven Foldsack Backpack",
         "price": 109.95,
-        "category": "men's clothing",
-        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        "category": "Art",
+        "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
       },
       {
         "id": 2,
-        "name": "Mens Casual Premium Slim Fit T-Shirts ",
+        "name": "Casual Premium Slim Fit T-Shirts",
         "price": 22.3,
-        "category": "men's clothing",
-        "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+        "category": "Clothes",
+        "image": "https://images.unsplash.com/photo-1630750793977-b9189e00594f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
       },
       {
         "id": 3,
-        "name": "Mens Cotton Jacket",
+        "name": "IPhone 13",
         "price": 55.99,
-        "category": "men's clothing",
-        "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+        "category": "Phones",
+        "image": "https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
     
       },
       {
         "id": 4,
-        "name": "Mens Casual Slim Fit",
+        "name": "Vehicle",
         "price": 15.99,
-        "category": "men's clothing",
-        "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+        "category": "Games",
+        "image": "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
       },
 
       {
         "id": 5,
-        "name": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        "name": "IPhone 11 Max Pro",
         "price": 695,
-        "category": "jewelery",
-        "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"
+        "category": "Phones",
+        "image": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80"
       },
       {
         "id": 6,
-        "name": "Solid Gold Petite Micropave ",
+        "name": "Solid Gold Petite Micropave",
         "price": 168,
-        "category": "jewelery",
-        "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"
+        "category": "Art",
+        "image": "https://images.unsplash.com/photo-1541367777708-7905fe3296c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
       },
       {
         "id": 7,
-        "name": "White Gold Plated Princess",
+        "name": "Car",
         "price": 9.99,
-        "category": "jewelery",
-        "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg"
+        "category": "Games",
+        "image": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
       },
       {
         "id": 8,
         "name": "Pierced Owl Rose Gold Plated Stainless Steel Double",
         "price": 10.99,
-        "category": "jewelery",
-        "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg"
+        "category": "Clothes",
+        "image": "https://images.unsplash.com/photo-1630750793250-71173d8bfa5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
       }
 ]
