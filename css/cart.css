@@ -1,0 +1,177 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif ;
+}
+:root{ 
+    --primary: #E55F34;
+    --background: #F8F8F8;
+    --secondery: #FEF7F5;
+    --white: #ffffff;
+    --fontColor:#1D1D35;
+    }
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+    width: 0.8vw;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 10px;
+}
+/* START CART SECTION  */
+.cart-section {
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    background-color: var(--background);
+    padding: 1em;
+    width: 30em;
+    height: 100vh !important;
+    color:var(--fontColor)
+}
+/* start header cart */
+.cart-section .header-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+    height: 5vh;
+}
+.cart-section .header-cart .close {
+    font-size: 1.3em;
+} 
+.cart-section .header-cart .cart-name {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+.cart-section .header-cart .remove-all {
+    color: var(--primary);
+    cursor: pointer;
+}
+/* end header cart */
+/* start content cart */
+.cart-section .content-cart {
+    overflow-y: scroll;
+    height: 60vh;
+}
+.cart-section .content-cart .item {
+    background-color: var(--white);
+    padding: .5em;
+    border-radius: 1em;
+    display: flex;
+    margin-bottom: 1em;
+    margin-right: 0.3em;
+}
+.cart-section .content-cart .item img {
+    width: 8em;
+    height: 7em;
+    border-radius: 1em;
+}
+.cart-section .content-cart .item .info-item {
+    padding: 1.2em;
+}
+.cart-section .content-cart .item .info-item .data {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+.cart-section .content-cart .item .info-item .name-item {
+    font-weight: 100;
+    font-size: 1em;
+}
+.cart-section .content-cart .item .info-item .price-item {
+    font-family: bold;
+}
+.cart-section .content-cart .item .info-item .quentity .quantity-number{
+    margin-right: 0.5em;
+}
+.cart-section .content-cart .item .info-item .quentity .minus,
+.cart-section .content-cart .item .info-item .quentity .plus
+{
+    width: 2em;
+    height: 2em;
+    background-color: var(--background);
+    border-radius: 50%;
+    padding: .5em;
+    margin-right: 0.5em;
+}
+.cart-section .content-cart .item .info-item .remove {
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+/* end content cart */
+
+/* start footer cart */
+.cart-section .footer-cart {
+    height: 20vh;
+ }
+.cart-section .footer-cart .total,
+.cart-section .footer-cart .buy {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+.cart-section .footer-cart .total .total-number {
+    font-weight: bold;
+}
+.cart-section .footer-cart .buy button:first-of-type {
+    color: var(--primary);
+}
+.cart-section .footer-cart .buy button:last-child {
+    color: var(--white);
+    background-color: var(--primary);
+    padding: 1em 7em;
+    border-radius: 1em;
+}
+/* end footer cart */
+/* End CART SECTION */
+/* START RESPONSIVE  */
+@media (max-width:768px) {
+    .cart-section {
+        width: 20em;
+    }
+    .cart-section .content-cart .item {
+        flex-direction: column;
+    }
+    .cart-section .content-cart .item img {
+        width: 10em;
+        margin: 0 auto;
+    }
+    .cart-section .content-cart .item .info-item .data {
+        flex-direction: column;
+    }
+    .cart-section .content-cart .item .info-item .name-item,
+    .cart-section .content-cart .item .info-item .quentity {
+        margin-bottom: 0.5em;
+    }
+    .cart-section .footer-cart .buy button:last-child {
+        padding: 1em 3em;
+    }
+}
+@media (min-width:769px)  and (max-width:1023px) {
+    .cart-section {
+        width: 25em;
+    }
+    .cart-section .content-cart .item img {
+       width: 8em;
+       height: 10em;
+    }
+    .cart-section .content-cart .item .info-item .data {
+        flex-direction: column;
+    }
+    .cart-section .content-cart .item .info-item .name-item,
+    .cart-section .content-cart .item .info-item .quentity {
+        margin-bottom: 0.5em;
+    }
+}
+/* END RESPONSIVE  */
