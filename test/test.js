@@ -5,6 +5,7 @@ const {
     editProduct,
     searchProduct,
     filterProduct,
+    sortProduct,
 } = require("../js/logic");
 
 describe("Test Add Products", () => {
@@ -201,5 +202,91 @@ describe("Filter Function", () => {
             },
         ];
         expect(filterProduct(nameCategory)).toEqual(products);
+    });
+});
+
+describe("Sort Function", () => {
+    test("should order the products by maximum price", () => {
+        const sortType = "Minimum";
+        const sortedList = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
+        expect(sortProduct(sortType)).toEqual(sortedList);
+    });
+
+    test("should order the products by minimum price", () => {
+        const sortType = "Maximum";
+        const sortedList = [
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
+        expect(sortProduct(sortType)).toEqual(sortedList);
+    });
+
+    test("should return the array as it", () => {
+        const sortType = "None";
+        const sortProductList = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
+        expect(sortProduct(sortType)).toEqual(sortProductList);
     });
 });

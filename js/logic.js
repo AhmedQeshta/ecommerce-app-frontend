@@ -33,6 +33,30 @@ let products = [
     },
 ];
 
+const sortProductList = [
+    {
+        id: 1,
+        name: "first",
+        price: 10.15,
+        category: "clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    },
+    {
+        id: 2,
+        name: "first",
+        price: 20,
+        category: "clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    },
+    {
+        id: 3,
+        name: "first",
+        price: 15.2,
+        category: "clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    },
+];
+
 // logic For Add Products
 const addProduct = (newProduct) => {
     if (newProduct == undefined) {
@@ -79,6 +103,19 @@ const filterProduct = (nameCategory) => {
     }
 };
 
+// logic For Sort Products
+const sortProduct = (sortType) => {
+    if (sortType === "None" || sortType === undefined) {
+        return sortProductList;
+    } else {
+        const newProducts = [...sortProductList];
+        if (sortType === "Maximum")
+            return newProducts.sort((a, b) => (a.price > b.price ? -1 : 1));
+        if (sortType === "Minimum")
+            return newProducts.sort((a, b) => (a.price > b.price ? 1 : -1));
+    }
+};
+
 module.exports = {
     addProduct,
     deleteProduct,
@@ -86,4 +123,5 @@ module.exports = {
     editProduct,
     searchProduct,
     filterProduct,
+    sortProduct,
 };
