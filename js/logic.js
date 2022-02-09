@@ -1,21 +1,3 @@
-let beforeDeleteProductList = [
-    {
-        id: 1,
-        name: "first",
-        price: 10.15,
-        category: "clothing",
-        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    },
-    {
-        id: 2,
-        name: "first",
-        price: 10.15,
-        category: "clothing",
-        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    },
-];
-
-let productList = [];
 let products = [
     {
         id: 1,
@@ -58,16 +40,6 @@ const sortProductList = [
 ];
 
 
-
-// logic For Delete Products
-const deleteProduct = (indexProduct) => {
-    if (indexProduct === undefined) {
-        return beforeDeleteProductList;
-    } else {
-        beforeDeleteProductList.splice(indexProduct, 1);
-        return beforeDeleteProductList;
-    }
-};
 //logic for edit product
 const editProduct = (i, editProduct) => {
     return products.map((product) => {
@@ -110,12 +82,12 @@ const sortProduct = (sortType) => {
 };
 
 // ------ *** --------  convert data product to object   -------- *** --------
-const convertToObject = (id, name, price, category, image) => {
+const convertToObject = (id, name,category, price,  image) => {
     return {
         id,
         name,
-        price,
         category,
+        price,
         image,
     };
 };
@@ -148,8 +120,6 @@ const checkFormData = (name, price, category, image) => {
 
 if (typeof module !== "undefined") {
     module.exports = {
-        deleteProduct,
-        beforeDeleteProductList,
         editProduct,
         searchProduct,
         filterProduct,
