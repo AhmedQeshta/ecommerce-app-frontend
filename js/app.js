@@ -31,7 +31,7 @@ let cartItems = [];
 let isBuyer = true;
 
 productsList = getProducts("products");
-render(products);
+render(productsList);
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
@@ -39,14 +39,17 @@ btnBuyer.addEventListener("click", () => {
     btnBuyerMain.classList.add("btn-active");
     btnAddProduct.style.display = "none";
     userTyper(true);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
+
 btnSeller.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
     btnAddProduct.style.display = "block";
     userTyper(false);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 btnBuyerMain.addEventListener("click", () => {
@@ -54,7 +57,8 @@ btnBuyerMain.addEventListener("click", () => {
     btnBuyerMain.classList.add("btn-active");
     btnAddProduct.style.display = "none";
     userTyper(true);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 btnSellerMain.addEventListener("click", () => {
@@ -62,7 +66,8 @@ btnSellerMain.addEventListener("click", () => {
     btnSellerMain.classList.add("btn-active");
     btnAddProduct.style.display = "block";
     userTyper(false);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 // Function to check if the user buyer or seller
@@ -406,4 +411,7 @@ function deleteProductDom(object, indexProduct) {
 }
 
 // Get Products when the user reload the page
-window.onload = getProducts("products");
+window.onload = () => {
+    productsList = getProducts("products");
+    render(productsList);
+};
