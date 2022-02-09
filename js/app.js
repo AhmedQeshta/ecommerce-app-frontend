@@ -14,7 +14,20 @@ const minusBtn=document.querySelector('.minus')
 const plusBtn=document.querySelector('.plus')
 const removeAll = document.querySelector('.remove-all')
 
-let cartItems=[]
+let cartItems=[ {
+    "id": 1,
+    "name": "Fjallraven Foldsack Backpack",
+    "price": 109.95,
+    "category": "Art",
+    "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
+  },
+  {
+    "id": 2,
+    "name": "Casual Premium Slim Fit T-Shirts",
+    "price": 22.3,
+    "category": "Clothes",
+    "image": "https://images.unsplash.com/photo-1630750793977-b9189e00594f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
+  }]
 
 //Import data from JSON files
 let fetchData = () => {
@@ -72,8 +85,8 @@ function getElement(idName) {
 // function for render items in cart content
 const renderCart= () => {
     if(hasProduct(cartItems)) {
-        cartItems.forEach((item)=>{
-            cartContent.innerHTML += ` <div class="item">
+        cartItems.forEach((item,i)=>{
+            cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
                 src="${item.image}"
                 alt="${item.name}"
@@ -87,11 +100,11 @@ const renderCart= () => {
                 </div>
                 <div class="data">
                     <div class="quentity">
-                        <button class="minus" >
+                        <button class="minus" onclick="decrement(${i})" >
                             <i class="far fa-minus"></i>
                         </button>
-                        <span class="quantity-number">1</span>
-                        <button class="plus" >
+                        <span class="quantity-number"  >1</span>
+                        <button class="plus" onclick="increment(${i})" >
                             <i class="far fa-plus"></i>
                         </button>
                     </div>
@@ -117,8 +130,24 @@ function hasProduct(productList) {
     }
     return true;
 }
-
+//remove all items from cart and from local storage
 removeAll.addEventListener('click',()=>{
     cartItems = []
     postProducts('cartItems',cartItems)
 })
+//increment quantity function 
+const increment = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    quantity.textContent =  parseInt(quantity.textContent) + 1
+}
+//decrement quantity function 
+const decrement = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    if (parseInt(quantity.textContent) ===1) {
+        quantity.textContent =1
+    }
+    else {
+        quantity.textContent =  parseInt(quantity.textContent) -1
+    }
+  
+}
