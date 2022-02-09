@@ -193,32 +193,21 @@ button {
     font-style: normal;
     font-weight: 500;
     margin: 0 5px;
+    color: var(--primary);
+    background: var(--white);
     font-family: "Manrope", sans-serif;
     transition: all ease-in-out 0.5s;
 }
 
-.btn-buyer {
+.btn-active {
     color: var(--white);
     background: var(--primary);
-    border: 1px solid var(--primary);
-}
-.btn-buyer:hover,
-.btn-buyer:focus {
-    color: var(--primary);
-    background: var(--white);
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary) !important;
 }
 
-.btn-seller {
-    color: var(--primary);
-    background: var(--white);
-    border: 1px solid var(--primary);
-}
-.btn-seller:hover,
-.btn-seller:focus {
-    color: var(--white);
-    background: var(--primary);
-    border: 1px solid var(--primary);
+.btn-buyer:hover,
+.btn-seller:hover {
+    filter: brightness(95%);
 }
 
 .btn-shopping-bag {
