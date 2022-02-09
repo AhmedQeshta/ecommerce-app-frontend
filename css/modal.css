@@ -139,6 +139,7 @@ modal style add product
     position: relative;
     height: 100vh;
     transition: all 0.5s ease-in-out;
+    z-index: 99;
 }
 
 .modal-hidden {
@@ -170,19 +171,8 @@ modal style add product
     margin: 0 15px;
     padding: 25px 60px;
     top: 15vh;
-    animation: paperProductContent ease-in-out 0.5s;
 }
 
-@keyframes paperProductContent {
-    from {
-        opacity: 0;
-        visibility: hidden;
-    }
-    to {
-        opacity: 1;
-        visibility: visible;
-    }
-}
 .modal-product-content .fa-times {
     position: absolute;
     top: 15px;
