@@ -1,3 +1,4 @@
+// ------ *** --------       Get Data From Dom   (Element)       -------- *** --------
 const closeModal = document.getElementById("close-modal");
 const modalStarter = document.getElementById("modal-starter");
 const navbarContent = document.getElementById("navbar-content");
@@ -7,38 +8,61 @@ const btnCloseCart = document.getElementById("btn-close-cart");
 const btnShowCart = document.getElementById("btn-shopping-bag");
 const modalCreateProduct = getElement("modal-create-product");
 const btnCloseProductModal = getElement("close-product-modal");
-const btnAddProduct = getElement("btnAddProduct");
 const modalProductOverview = getElement("modal-product-overview");
-const cartContent=document.querySelector('.content-cart')
-const minusBtn=document.querySelector('.minus')
-const plusBtn=document.querySelector('.plus')
-const removeAll = document.querySelector('.remove-all')
+const btnAddProduct = document.getElementById("btnAddProduct");
+const btnBuyer = document.querySelector(".btn-modal-buyer");
+const btnSeller = document.querySelector(".btn-modal-seller");
+const cartContent = document.querySelector(".content-cart");
+const minusBtn = document.querySelector(".minus");
+const plusBtn = document.querySelector(".plus");
+const removeAll = document.querySelector(".remove-all");
+const productName = getElement("name");
+const productCategory = getElement("category");
+const productPrice = getElement("product-price");
+const productImageUrl = getElement("image-url");
+const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
-let cartItems=[ {
-    "id": 1,
-    "name": "Fjallraven Foldsack Backpack",
-    "price": 109.95,
-    "category": "Art",
-    "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
-  },
-  {
-    "id": 2,
-    "name": "Casual Premium Slim Fit T-Shirts",
-    "price": 22.3,
-    "category": "Clothes",
-    "image": "https://images.unsplash.com/photo-1630750793977-b9189e00594f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
-  }]
+let cartItems = [];
+let isBuyer = true;
+
+// add event listener to buyer and seller buttons
+btnBuyer.addEventListener("click", () => {
+    userTyper(true);
+});
+btnSeller.addEventListener("click", () => {
+    userTyper(false);
+});
+
+// Function to check if the user buyer or seller
+function userTyper(isABuyer) {
+    isBuyer = isABuyer;
+    modalStarter.style.display = "none";
+}
+
+// Show modalStarter popup;
+if (localStorage.getItem("popState") !== "shown") {
+    window.addEventListener("load", function () {
+        modalStarter.style.display = "flex";
+        localStorage.setItem("popState", "shown");
+    });
+}
+
+// Function post Products to localStorage
+function postProducts(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+    getProducts(key);
+}
 
 //Import data from JSON files
-let fetchData = () => {
-    fetch("../data/products.json")
-        .then((response) => {
-            return response.json();
-        })
-        .then((productListJson) => render(productListJson));
-};
-fetchData();
-postProducts('cartItems',cartItems)
+// let fetchData = () => {
+//     fetch("../data/products.json")
+//         .then((response) => {
+//             return response.json();
+//         })
+//         .then((productListJson) => render(productListJson));
+// };
+// fetchData();
+postProducts("cartItems", cartItems);
 // Function post Products to localStorage
 function postProducts(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
@@ -82,6 +106,154 @@ function toggleClass(element, section, className) {
 function getElement(idName) {
     return document.getElementById(idName);
 }
+
+// --------------- Function to add Product ------------------
+
+
+btnSubmitFormProduct.addEventListener("click", () =>
+    SubmitFormToCreateProduct()
+);
+
+// ------ *** --------      Submit Form To Create Product       -------- *** --------
+let newListProducts;
+if (localStorage.product != null) {
+    newListProducts = convertStringArrayToArray(localStorage.product);
+} else {
+    newListProducts = [];
+}
+
+const SubmitFormToCreateProduct = () => {
+    if (
+        checkFormData(
+            productName.value,
+            productCategory.value,
+            productPrice.value,
+            productImageUrl.value
+        )
+    ) {
+        // ------ *** --------  convert data product to object   -------- *** --------
+        let id = Math.floor(Math.random() * 999);
+        let newProductObject = convertToObject(
+            id,
+            productName.value,
+            productCategory.value,
+            productPrice.value,
+            productImageUrl.value
+        );
+
+        // ------ *** --------   push a abject to new array      -------- *** --------
+        newListProducts.push(newProductObject);
+
+        // ------ *** --------   Save data in local storage      -------- *** --------
+        storeArrayDataOf("product", convertArrayToString(newListProducts));
+
+        // ------ *** --------   Clean data After send and close modal     -------- *** --------
+        cleanInputForm();
+
+        // ------ *** --------   Refresh dom to render dom       -------- *** --------
+        getProducts("product");
+    } else {
+        alert("Input is not Valid");
+    }
+};
+
+getProducts("product");
+
+const cleanInputForm = () => {
+    productName.value = "";
+    productCategory.value = "";
+    productPrice.value = "";
+    productImageUrl.value = "";
+    modalCreateProduct.classList.add("modal-hidden");
+};
+
+// Function Check if the product list has a product
+function hasProduct(productList) {
+    if (
+        productList.length == 0 ||
+        productList == undefined ||
+        productList == null
+    ) {
+        return false;
+    }
+    return true;
+}
+
+// Function to Render Products at home page
+function render(productList) {
+    if (hasProduct(productList)) {
+        let order = 0;
+        let listProducts = document.querySelector(".product-list");
+
+        productList.forEach((product) => {
+            let list = document.createElement("li");
+            let wrapImg = document.createElement("div");
+            wrapImg.className = "wrap-img";
+            let infoProduct = document.createElement("div");
+            infoProduct.className = "info-product";
+
+            let imgProduct = document.createElement("img");
+            imgProduct.className = "img";
+            imgProduct.setAttribute("src", product.image);
+            let category = document.createElement("div");
+            category.innerText = product.category;
+            category.className = "category";
+
+            let edit = document.createElement("div");
+            let iconForEdit = document.createElement("i");
+
+            if (!isBuyer) {
+                edit.setAttribute("data-index", order);
+                edit.className = "edit";
+                edit.addEventListener("click", () => editProductDom(product));
+                iconForEdit.className = "fa fa-pencil";
+                edit.appendChild(iconForEdit);
+                wrapImg.appendChild(edit);
+            }
+
+            let nameAndPrice = document.createElement("div");
+            nameAndPrice.className = "name-price";
+            let addCart = document.createElement("div");
+            addCart.setAttribute("data-index", order++);
+            addCart.className = "add-cart";
+
+            let iconForAdd = document.createElement("i");
+
+            if (isBuyer) {
+                addCart.addEventListener("click", () => addToCartDom(product));
+                iconForAdd.className = "far fa-cart-plus";
+            } else {
+                addCart.addEventListener("click", () =>
+                    deleteProductDom(product)
+                );
+                iconForAdd.className = "far fa-trash-alt";
+            }
+
+            let name = document.createElement("h3");
+            name.innerText = product.name;
+            name.className = "name";
+            let price = document.createElement("p");
+            price.innerText = `$${product.price}`;
+            price.className = "price";
+
+            addCart.appendChild(iconForAdd);
+            nameAndPrice.appendChild(name);
+            nameAndPrice.appendChild(price);
+
+            wrapImg.appendChild(category);
+            wrapImg.appendChild(imgProduct);
+
+            infoProduct.appendChild(nameAndPrice);
+            infoProduct.appendChild(addCart);
+
+            list.appendChild(wrapImg);
+            list.appendChild(infoProduct);
+
+            listProducts.insertBefore(list, listProducts.childNodes[0]);
+        });
+    }
+}
+
 // function for render items in cart content
 const renderCart= () => {
     if(hasProduct(cartItems)) {
@@ -111,14 +283,14 @@ const renderCart= () => {
                     <h4 class="remove">Remove</h4>
                 </div>
             </div>
-        </div>`
-        })
+        </div>`;
+        });
+    } else {
+        cartContent.innerHTML = "There is no items yet";
     }
-    else {
-        cartContent.innerHTML ='There is no items yet'
-    }
-}
-renderCart()
+};
+postProducts("cartItems", cartItems);
+renderCart();
 // Function Check if the product list has a product
 function hasProduct(productList) {
     if (
@@ -151,3 +323,4 @@ const decrement = (i) => {
     }
   
 }
+
