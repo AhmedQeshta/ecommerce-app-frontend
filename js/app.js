@@ -5,23 +5,36 @@ const btnCloseNav = document.getElementById("btn-close-navbar");
 const cartSection = document.getElementById("cart-section");
 const btnCloseCart = document.getElementById("btn-close-cart");
 const btnShowCart = document.getElementById("btn-shopping-bag");
+const modalCreateProduct = getElement("modal-create-product");
+const btnCloseProductModal = getElement("close-product-modal");
+const btnAddProduct = getElement("btnAddProduct");
+const modalProductOverview = getElement("modal-product-overview");
 
 // Function  close Modal
-closeModal.addEventListener("click", () => {
-    modalStarter.classList.toggle("modal-hidden");
-});
+toggleClass(closeModal, modalStarter, "modal-hidden");
 
 // Function  close nav
-btnCloseNav.addEventListener("click", () => {
-    navbarContent.classList.toggle("navbar-hidden");
-});
+toggleClass(btnCloseNav, navbarContent, "navbar-hidden");
 
 // Function  close Cart
-btnCloseCart.addEventListener("click", () => {
-    cartSection.classList.toggle("cart-hidden");
-});
+toggleClass(btnCloseCart, cartSection, "cart-hidden");
 
 // Function  open/close Cart
-btnShowCart.addEventListener("click", () => {
-    cartSection.classList.toggle("cart-hidden");
-});
+toggleClass(btnShowCart, cartSection, "cart-hidden");
+
+// Function  Product Modal
+toggleClass(btnCloseProductModal, modalCreateProduct, "modal-hidden");
+toggleClass(modalProductOverview, modalCreateProduct, "modal-hidden");
+toggleClass(btnAddProduct, modalCreateProduct, "modal-hidden");
+
+// ------ Function to Toggle Class ---------
+function toggleClass(element, section, className) {
+    element.addEventListener("click", () => {
+        section.classList.toggle(className);
+    });
+}
+
+// ------ Function to get Element by id ---------
+function getElement(idName) {
+    return document.getElementById(idName);
+}
