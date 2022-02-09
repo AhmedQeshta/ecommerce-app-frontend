@@ -10,6 +10,8 @@ const modalCreateProduct = getElement("modal-create-product");
 const btnCloseProductModal = getElement("close-product-modal");
 const modalProductOverview = getElement("modal-product-overview");
 const btnAddProduct = document.getElementById("btnAddProduct");
+const sort = document.getElementById("sort");
+const filter = document.getElementById("filter");
 const btnBuyer = document.querySelector(".btn-modal-buyer");
 const btnSeller = document.querySelector(".btn-modal-seller");
 const cartContent = document.querySelector(".content-cart");
@@ -24,8 +26,12 @@ const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
+let productsList;
 let cartItems = [];
 let isBuyer = true;
+
+productsList = getProducts("products");
+render(productsList);
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
@@ -33,14 +39,17 @@ btnBuyer.addEventListener("click", () => {
     btnBuyerMain.classList.add("btn-active");
     btnAddProduct.style.display = "none";
     userTyper(true);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
+
 btnSeller.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
     btnAddProduct.style.display = "block";
     userTyper(false);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 btnBuyerMain.addEventListener("click", () => {
@@ -48,7 +57,8 @@ btnBuyerMain.addEventListener("click", () => {
     btnBuyerMain.classList.add("btn-active");
     btnAddProduct.style.display = "none";
     userTyper(true);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 btnSellerMain.addEventListener("click", () => {
@@ -56,7 +66,8 @@ btnSellerMain.addEventListener("click", () => {
     btnSellerMain.classList.add("btn-active");
     btnAddProduct.style.display = "block";
     userTyper(false);
-    getProducts("products");
+    productsList = getProducts("products");
+    render(productsList);
 });
 
 // Function to check if the user buyer or seller
@@ -92,7 +103,6 @@ function getProducts(key) {
         localStorage.getItem(key) === null
             ? []
             : JSON.parse(localStorage.getItem(key));
-    render(data);
     return data;
 }
 
@@ -330,6 +340,7 @@ const increment = (i) => {
     quantity.textContent = parseInt(quantity.textContent) + 1;
     totalPrice();
 };
+
 //decrement quantity function
 const decrement = (i) => {
     let quantity = document.getElementById(`index-${i}`).childNodes[3]
@@ -339,8 +350,27 @@ const decrement = (i) => {
     } else {
         quantity.textContent = parseInt(quantity.textContent) - 1;
     }
-    totalPrice();
 };
+
+// Filter Products
+filter.addEventListener("click", () => {
+    render(
+        filterProduct(
+            filter.options[filter.selectedIndex].value,
+            getProducts("products")
+        )
+    );
+});
+
+// Sort Products
+sort.addEventListener("click", () => {
+    render(
+        sortProduct(
+            sort.options[sort.selectedIndex].value,
+            getProducts("products")
+        )
+    );
+});
 
 const totalPrice = () => {
     let items = document.querySelectorAll(".item");
@@ -374,15 +404,18 @@ removeAll.addEventListener("click", () => {
 
 // ------------------------ *** Function For delete product *** ------------------
 function deleteProductDom(object, indexProduct) {
-    
-
     // For delete product form array
     newListProducts.splice(indexProduct, 1);
 
     // ------ *** --------   Save data in local storage      -------- *** --------
     storeArrayDataOf("product", convertArrayToString(newListProducts));
     // ------ *** --------   Refresh dom to render dom       -------- *** --------
-    
+
     getProducts("product");
 }
 
+// Get Products when the user reload the page
+window.onload = () => {
+    productsList = getProducts("products");
+    render(productsList);
+};

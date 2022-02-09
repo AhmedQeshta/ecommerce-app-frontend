@@ -39,7 +39,6 @@ const sortProductList = [
     },
 ];
 
-
 //logic for edit product
 const editProduct = (i, editProduct) => {
     return products.map((product) => {
@@ -58,7 +57,7 @@ const searchProduct = (name) => {
 };
 
 // logic For filter Products
-const filterProduct = (nameCategory) => {
+const filterProduct = (nameCategory, products) => {
     if (nameCategory === "None" || nameCategory === undefined) {
         return products;
     } else {
@@ -69,11 +68,11 @@ const filterProduct = (nameCategory) => {
 };
 
 // logic For Sort Products
-const sortProduct = (sortType) => {
+const sortProduct = (sortType, products) => {
     if (sortType === "None" || sortType === undefined) {
-        return sortProductList;
+        return products;
     } else {
-        const newProducts = [...sortProductList];
+        const newProducts = [...products];
         if (sortType === "Maximum")
             return newProducts.sort((a, b) => (a.price > b.price ? -1 : 1));
         if (sortType === "Minimum")
@@ -82,7 +81,7 @@ const sortProduct = (sortType) => {
 };
 
 // ------ *** --------  convert data product to object   -------- *** --------
-const convertToObject = (id, name,category, price,  image) => {
+const convertToObject = (id, name, category, price, image) => {
     return {
         id,
         name,
