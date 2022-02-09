@@ -4,7 +4,7 @@
     position: fixed;
     top: 10vh;
     right: 0;
-    background-color: var(--background);
+    background-color: #e0dede;
     padding: 1em;
     width: 30em;
     height: 100vh !important;
@@ -12,7 +12,8 @@
     opacity: 1;
     visibility: visible;
     transition: all ease-in-out 0.5s;
-    z-index: 12;
+    z-index: 50;
+  
 }
 
 .cart-hidden {
@@ -129,7 +130,7 @@
 @media (max-width: 768px) {
     .cart-section {
         width: 20em;
-        top: 20vh;
+        top: 10vh;
     }
     .cart-section .content-cart .item {
         flex-direction: column;
