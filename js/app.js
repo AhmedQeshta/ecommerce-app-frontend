@@ -20,13 +20,13 @@ const plusBtn = document.querySelector(".plus");
 const removeAll = document.querySelector(".remove-all");
 const btnBuyerMain = document.querySelector(".btn-buyer");
 const btnSellerMain = document.querySelector(".btn-seller");
-const productName = getElement("name");
-const productCategory = getElement("category");
-const productPrice = getElement("product-price");
-const productImageUrl = getElement("image-url");
-const btnSubmitFormProduct = getElement("btn-submit-form-product");
-const numberItems =document.querySelector('.number-items')
-const numberNavbar =document.querySelector('.count-cart')
+const productName = document.getElementById("name");
+const productCategory = document.getElementById("category");
+const productPrice = document.getElementById("product-price");
+const productImageUrl = document.getElementById("image-url");
+const btnSubmitFormProduct = document.getElementById("btn-submit-form-product");
+const numberItems = document.querySelector(".number-items");
+const numberNavbar = document.querySelector(".count-cart");
 const addProductTitle = document.getElementById("add-product-title");
 
 let isCreate = true;
@@ -35,9 +35,9 @@ let idProduct;
 
 let productsList;
 let isBuyer = true;
-let cartItems ;
+let cartItems;
 
-cartItems=getProducts('cartItems');
+cartItems = getProducts("cartItems");
 productsList = getProducts("products");
 render(productsList);
 // add event listener to buyer and seller buttons
@@ -110,10 +110,10 @@ function getProducts(key) {
     //     localStorage.getItem(key) === null
     //         ? []
     //         : JSON.parse(localStorage.getItem(key));
-            data =
-            localStorage.getItem(key) == undefined
-                ? []
-                : JSON.parse(localStorage.getItem(key));
+    data =
+        localStorage.getItem(key) == undefined
+            ? []
+            : JSON.parse(localStorage.getItem(key));
     return data;
 }
 
@@ -150,7 +150,6 @@ btnAddProduct.addEventListener("click", () => {
     cleanInputForm();
     modalCreateProduct.classList.toggle("modal-hidden");
 });
-
 
 const SubmitFormToCreateProduct = () => {
     if (
@@ -295,9 +294,9 @@ function render(productList) {
 }
 
 // function for render items in cart content
- function renderCart(cartItems) {
+function renderCart(cartItems) {
     if (hasProduct(cartItems)) {
-        cartContent.innerHTML= ''
+        cartContent.innerHTML = "";
         cartItems.forEach((item, i) => {
             cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
@@ -329,7 +328,7 @@ function render(productList) {
     } else {
         cartContent.innerHTML = "There is no items yet";
     }
-};
+}
 // Function Check if the product list has a product
 function hasProduct(productList) {
     if (
@@ -409,7 +408,7 @@ totalPrice();
 removeAll.addEventListener("click", () => {
     cartItems = [];
     postProducts("cartItems", cartItems);
-    renderCart(getProducts('cartItems'))
+    renderCart(getProducts("cartItems"));
 });
 
 // ------------------------ *** Function For delete product *** ------------------
@@ -424,7 +423,7 @@ function deleteProductDom(object, indexProduct) {
     // ------ *** --------   Refresh dom to render dom       -------- *** --------
     render(products);
 }
-//add item to carts 
+//add item to carts
 // if (localStorage.cartItems != null) {
 //     cartItems = JSON.stringify(localStorage.cartItems);
 // } else {
@@ -432,20 +431,20 @@ function deleteProductDom(object, indexProduct) {
 // }
 
 function addToCartDom(product) {
-    cartItems=getProducts('cartItems') || []
-    product.quantity = 1 
-    cartItems.push(product)
+    cartItems = getProducts("cartItems") || [];
+    product.quantity = 1;
+    cartItems.push(product);
     postProducts("cartItems", cartItems);
-    renderCart(getProducts('cartItems'))
-    totalPrice()
-    lengthItems()
+    renderCart(getProducts("cartItems"));
+    totalPrice();
+    lengthItems();
 }
-//length items in the cart 
-function lengthItems(){
-    numberItems.textContent =`(${getProducts('cartItems').length} items)`
-    numberNavbar.textContent =`${getProducts('cartItems').length}`
+//length items in the cart
+function lengthItems() {
+    numberItems.textContent = `(${getProducts("cartItems").length} items)`;
+    numberNavbar.textContent = `${getProducts("cartItems").length}`;
 }
-lengthItems()
+lengthItems();
 
 // ------------------------ *** Function For delete product *** ------------------
 function editProductDom({ id, name, category, price, image }, indexProduct) {
@@ -467,13 +466,19 @@ function editProductDom({ id, name, category, price, image }, indexProduct) {
     isCreate = false;
 }
 
+// Search for product by name
+let searchInput = document.getElementById("search-input");
+searchInput.addEventListener("keyup", () => {
+    render(searchProduct(searchInput.value, getProducts("products")));
+});
+
 // Get Products when the user reload the page
 window.onload = () => {
     productsList = getProducts("products");
     render(productsList);
-    cartItems=getProducts('cartItems') || []
-    renderCart(cartItems)
-    totalPrice()
+    cartItems = getProducts("cartItems") || [];
+    renderCart(cartItems);
+    totalPrice();
 };
 
 // Create toggle view (grid, list)

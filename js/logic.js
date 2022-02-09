@@ -49,11 +49,24 @@ const editProduct = (i, editProduct) => {
         }
     });
 };
+
 //logic for search product by name
-const searchProduct = (name) => {
-    return products.filter((product) => {
-        return product.name.toLowerCase() === name.toLowerCase();
-    });
+const searchProduct = (name, products) => {
+    if (name === "" || name === undefined || name === null) {
+        return products;
+    }
+    let arr = [];
+    for (let i = 0; i < products.length; i++) {
+        if (
+            products[i].name
+                .toLowerCase()
+                .trim()
+                .includes(name.toLowerCase().trim())
+        ) {
+            arr.push(products[i]);
+        }
+    }
+    return arr;
 };
 
 // logic For filter Products
