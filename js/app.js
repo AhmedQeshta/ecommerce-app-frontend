@@ -151,6 +151,7 @@ const SubmitFormToCreateProduct = () => {
         cleanInputForm();
 
         // ------ *** --------   Refresh dom to render dom       -------- *** --------
+        getProducts("product");
     } else {
         alert("Input is not Valid");
     }
