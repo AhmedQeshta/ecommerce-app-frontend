@@ -85,15 +85,6 @@ function postProducts(key, data) {
     getProducts(key);
 }
 
-//Import data from JSON files
-// let fetchData = () => {
-//     fetch("../data/products.json")
-//         .then((response) => {
-//             return response.json();
-//         })
-//         .then((productListJson) => render(productListJson));
-// };
-// fetchData();
 postProducts("cartItems", cartItems);
 // Function post Products to localStorage
 function postProducts(key, data) {
@@ -214,7 +205,7 @@ function render(productList) {
     if (hasProduct(productList)) {
         let order = 0;
         let listProducts = document.querySelector(".product-list");
-
+        listProducts.innerHTML = "";
         productList.forEach((product) => {
             let list = document.createElement("li");
             let wrapImg = document.createElement("div");
@@ -244,7 +235,7 @@ function render(productList) {
             let nameAndPrice = document.createElement("div");
             nameAndPrice.className = "name-price";
             let addCart = document.createElement("div");
-            addCart.setAttribute("data-index", order++);
+            addCart.setAttribute("data-index", order);
             addCart.className = "add-cart";
 
             let iconForAdd = document.createElement("i");
@@ -254,7 +245,7 @@ function render(productList) {
                 iconForAdd.className = "far fa-cart-plus";
             } else {
                 addCart.addEventListener("click", () =>
-                    deleteProductDom(product)
+                    deleteProductDom(product, order++)
                 );
                 iconForAdd.className = "far fa-trash-alt";
             }
@@ -305,7 +296,7 @@ const renderCart = () => {
                         <button class="minus" onclick="decrement(${i})" >
                             <i class="far fa-minus"></i>
                         </button>
-                        <span class="quantity-number"  >1</span>
+                        <span class="quantity-number">1</span>
                         <button class="plus" onclick="increment(${i})" >
                             <i class="far fa-plus"></i>
                         </button>
@@ -342,7 +333,9 @@ const increment = (i) => {
     let quantity = document.getElementById(`index-${i}`).childNodes[3]
         .childNodes[3].childNodes[1].childNodes[3];
     quantity.textContent = parseInt(quantity.textContent) + 1;
+    totalPrice();
 };
+
 //decrement quantity function
 const decrement = (i) => {
     let quantity = document.getElementById(`index-${i}`).childNodes[3]
@@ -369,6 +362,48 @@ sort.addEventListener("click", () => {
         getProducts("products")
     );
 });
+
+const totalPrice = () => {
+    let items = document.querySelectorAll(".item");
+    console.log(items);
+    let total = document.getElementById("total-number");
+    // console.log(total)
+    let sum = 0;
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let priceElement = item.querySelector(".price-item");
+        console.log(priceElement);
+        let quantity = item.querySelector(".quantity-number").textContent;
+        console.log(quantity);
+        let price = priceElement.textContent;
+        price = parseFloat(price.replace("$", ""));
+        sum = sum + price * quantity;
+    }
+    total.innerText = sum.toFixed(2) + "$";
+    postProducts("total", sum);
+};
+totalPrice();
+
+postProducts("cartItems", cartItems);
+renderCart();
+
+// Remove all product from cart
+removeAll.addEventListener("click", () => {
+    cartItems = [];
+    postProducts("cartItems", cartItems);
+});
+
+// ------------------------ *** Function For delete product *** ------------------
+function deleteProductDom(object, indexProduct) {
+    // For delete product form array
+    newListProducts.splice(indexProduct, 1);
+
+    // ------ *** --------   Save data in local storage      -------- *** --------
+    storeArrayDataOf("product", convertArrayToString(newListProducts));
+    // ------ *** --------   Refresh dom to render dom       -------- *** --------
+
+    getProducts("product");
+}
 
 // Get Products when the user reload the page
 window.onload = getProducts("products");
