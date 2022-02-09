@@ -6,9 +6,9 @@ const btnCloseNav = document.getElementById("btn-close-navbar");
 const cartSection = document.getElementById("cart-section");
 const btnCloseCart = document.getElementById("btn-close-cart");
 const btnShowCart = document.getElementById("btn-shopping-bag");
-const modalCreateProduct = getElement("modal-create-product");
-const btnCloseProductModal = getElement("close-product-modal");
-const modalProductOverview = getElement("modal-product-overview");
+const modalCreateProduct = document.getElementById("modal-create-product");
+const btnCloseProductModal = document.getElementById("close-product-modal");
+const modalProductOverview = document.getElementById("modal-product-overview");
 const btnAddProduct = document.getElementById("btnAddProduct");
 const sort = document.getElementById("sort");
 const filter = document.getElementById("filter");
@@ -20,11 +20,16 @@ const plusBtn = document.querySelector(".plus");
 const removeAll = document.querySelector(".remove-all");
 const btnBuyerMain = document.querySelector(".btn-buyer");
 const btnSellerMain = document.querySelector(".btn-seller");
-const productName = getElement("name");
-const productCategory = getElement("category");
-const productPrice = getElement("product-price");
-const productImageUrl = getElement("image-url");
-const btnSubmitFormProduct = getElement("btn-submit-form-product");
+const productName = document.getElementById("name");
+const productCategory = document.getElementById("category");
+const productPrice = document.getElementById("product-price");
+const productImageUrl = document.getElementById("image-url");
+const btnSubmitFormProduct = document.getElementById("btn-submit-form-product");
+const addProductTitle = document.getElementById("add-product-title");
+
+let isCreate = true;
+let INDEX_PRODUCT_GLOBAL;
+let idProduct;
 
 let productsList;
 let cartItems = [];
@@ -129,24 +134,17 @@ function toggleClass(element, section, className) {
     });
 }
 
-// ------ Function to get Element by id ---------
-function getElement(idName) {
-    return document.getElementById(idName);
-}
-
 // --------------- Function to add Product ------------------
 
 btnSubmitFormProduct.addEventListener("click", () =>
     SubmitFormToCreateProduct()
 );
 
-// ------ *** --------      Submit Form To Create Product       -------- *** --------
-let newListProducts;
-if (localStorage.product != null) {
-    newListProducts = convertStringArrayToArray(localStorage.product);
-} else {
-    newListProducts = [];
-}
+btnAddProduct.addEventListener("click", () => {
+    cleanInputForm();
+    modalCreateProduct.classList.toggle("modal-hidden");
+});
+
 
 const SubmitFormToCreateProduct = () => {
     if (
@@ -158,7 +156,7 @@ const SubmitFormToCreateProduct = () => {
         )
     ) {
         // ------ *** --------  convert data product to object   -------- *** --------
-        let id = Math.floor(Math.random() * 999);
+        let id = idProduct || Math.floor(Math.random() * 999);
         let newProductObject = convertToObject(
             id,
             productName.value,
@@ -166,12 +164,13 @@ const SubmitFormToCreateProduct = () => {
             productPrice.value,
             productImageUrl.value
         );
-
-        // ------ *** --------   push a abject to new array      -------- *** --------
-        productsList.push(newProductObject);
-
-        // ------ *** --------   Save data in local storage      -------- *** --------
-        // storeArrayDataOf("product", convertArrayToString(newListProducts));
+        if (isCreate) {
+            // ------ *** --------   push a abject to new array      -------- *** --------
+            productsList.push(newProductObject);
+        } else {
+            // ------ *** --------   update a abject to new array      -------- *** --------
+            productsList[INDEX_PRODUCT_GLOBAL] = newProductObject;
+        }
         postProducts("products", productsList);
         let products = getProducts("products");
 
@@ -192,7 +191,12 @@ const cleanInputForm = () => {
     productCategory.value = "";
     productPrice.value = "";
     productImageUrl.value = "";
+    INDEX_PRODUCT_GLOBAL = "";
+    idProduct = "";
     modalCreateProduct.classList.add("modal-hidden");
+    btnSubmitFormProduct.innerHTML = "Add Product";
+    addProductTitle.innerHTML = "Add more products to sell more ";
+    isCreate = true;
 };
 
 // Function Check if the product list has a product
@@ -233,7 +237,9 @@ function render(productList) {
             if (!isBuyer) {
                 edit.setAttribute("data-index", order);
                 edit.className = "edit";
-                edit.addEventListener("click", () => editProductDom(product));
+                edit.addEventListener("click", () =>
+                    editProductDom(product, order++)
+                );
                 iconForEdit.className = "fa fa-pencil";
                 edit.appendChild(iconForEdit);
                 wrapImg.appendChild(edit);
@@ -415,6 +421,26 @@ function deleteProductDom(object, indexProduct) {
 
     // ------ *** --------   Refresh dom to render dom       -------- *** --------
     render(products);
+}
+
+// ------------------------ *** Function For delete product *** ------------------
+function editProductDom({ id, name, category, price, image }, indexProduct) {
+    // For delete product form array
+
+    // Show Form Edit
+    modalCreateProduct.classList.remove("modal-hidden");
+    btnSubmitFormProduct.innerHTML = "Update Product";
+    addProductTitle.innerHTML = "Update your product";
+
+    // Get Form Edit data (old-data)
+    idProduct = id;
+    productName.value = name;
+    productCategory.value = category;
+    productPrice.value = price;
+    productImageUrl.value = image;
+    INDEX_PRODUCT_GLOBAL = indexProduct;
+
+    isCreate = false;
 }
 
 // Get Products when the user reload the page
