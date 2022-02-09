@@ -256,6 +256,7 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #1d1d35;
 }
 
 .some-fun {
@@ -341,6 +342,9 @@ button {
     color: var(--primary);
 }
 
+main{
+    width: 100%;
+}
 /* For Grid View */
 .product-list {
     margin-top: 15px;
