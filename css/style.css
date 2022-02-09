@@ -109,6 +109,7 @@ button {
     width: 100%;
     padding: 0 50px;
     position: fixed;
+    z-index: 11;
 }
 
 .logo {
@@ -258,7 +259,7 @@ button {
 --------------------------------------------------------------------- */
 .container {
     position: absolute;
-    left: calc(10vw/2);
+    left: calc(10vw / 2);
     top: 10vh;
     width: 90vw;
     margin-top: 20px;
@@ -363,7 +364,7 @@ button {
 
 .product-list li {
     padding: 15px;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     border-radius: 20px;
     background-color: var(--white);
@@ -372,6 +373,7 @@ button {
 .wrap-img {
     position: relative;
     border-radius: 20px;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -399,6 +401,7 @@ button {
     background-color: rgba(0, 0, 0, 0.3);
     color: var(--white);
     font-size: 14px;
+    z-index: 10;
 }
 
 .edit {
@@ -413,6 +416,7 @@ button {
     background-color: rgba(0, 0, 0, 0.3);
     font-size: 14px;
     cursor: pointer;
+    z-index: 10;
 }
 
 .info-product {
