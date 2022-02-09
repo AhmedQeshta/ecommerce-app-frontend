@@ -129,6 +129,224 @@
     border: 1px solid var(--primary);
 }
 
+/* -----------------------------------------
+modal style add product
+------------------------------------------- */
+.modal-create-product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    transition: all 0.5s ease-in-out;
+}
+
+.modal-hidden {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+.modal-show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-product-overview {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+}
+
+.modal-product-content {
+    background-color: var(--white);
+    position: absolute;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+    margin: 0 15px;
+    padding: 25px 60px;
+    top: 15vh;
+}
+
+.modal-product-content .fa-times {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.modal-product-content .fa-times:hover {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.add-product-title {
+    margin: 15px auto 5px auto;
+}
+
+.add-product-content {
+    width: 100%;
+}
+
+.product-form-input {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto 25px auto;
+}
+
+.product-form-input label {
+    font-size: 18px;
+    line-height: 21px;
+    color: #1d1d35;
+    margin-bottom: 3px;
+}
+
+.product-form-input .name-input,
+.product-form-input .category-input {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 15px 10px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #16171a;
+}
+.image-url,
+.product-price {
+    position: relative;
+}
+.image-url .fa-link,
+.product-price .fa-dollar-sign {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 15px;
+    width: 45px;
+    text-align: center;
+}
+
+.image-url-input,
+.price-input {
+    width: 100%;
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 15px 10px 15px 50px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #16171a;
+}
+
+.btn-product {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 27px;
+    color: #ffffff;
+    padding: 10px 0;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-product:hover {
+    background: var(--white);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Style  Custom Select  **/
+.custom-select {
+    position: relative;
+    font-family: Arial;
+}
+
+.custom-select select {
+    display: none;
+}
+
+.select-selected {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 15px 10px;
+    font-size: 16px;
+    line-height: 25px;
+    color: #16171a;
+    display: flex;
+    align-items: center;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    transform: translate(0, -50%);
+    border-color: #474a52 transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #474a52 transparent;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,
+.select-selected {
+    color: #16171a;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    background: #dfdede;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 12px;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 768px) {
     .modal-content .fa-times {
         position: absolute;
@@ -158,6 +376,34 @@
     .btn-modal-seller {
         padding: 7px 40px;
         font-size: 14px;
+    }
+
+    .modal-product-content {
+        background-color: var(--white);
+        position: absolute;
+        border-radius: 8px;
+        transition: all 0.5s ease-in-out;
+        margin: 0 10px;
+        padding: 25px 30px;
+        top: 5vh;
+    }
+
+    .product-form-input label {
+        font-size: 17px;
+        line-height: 19px;
+    }
+
+    .product-form-input .name-input,
+    .product-form-input .category-input {
+        padding: 12px 10px;
+        font-size: 16px;
+        line-height: 18px;
+        color: #16171a;
+    }
+    .add-product-title {
+        margin: 15px auto 5px auto;
+        font-size: 16px;
+        text-align: center;
     }
 }
 

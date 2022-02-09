@@ -111,7 +111,6 @@ button {
     position: fixed;
     z-index: 11;
 }
-
 .logo {
     flex: 10%;
     display: flex;
@@ -252,6 +251,7 @@ button {
 
 .fa-bars {
     display: none;
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------
