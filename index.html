@@ -71,6 +71,81 @@
             </div>
         </nav>
 
+        <!--Section of buttons (sort, filter, addProduct, listView, gridView) and Products List -->
+        <div class="container">
+            <main>
+                <!--Section of buttons (sort, filter, addProduct, listView, gridView) -->
+                <section class="some-fun">
+                    <!--Section of Selects (sort, filter)) -->
+                    <section class="filter-sort">
+                        <div class="for-arrow">
+                            <select class="select" name="sort" id="sort">
+                                <option value="None">Sort</option>
+                                <option value="Maximum">Maximum Price</option>
+                                <option value="Minimum">Minimum Price</option>
+                            </select>
+                            <i class="far fa-chevron-down arrow"></i>
+                        </div>
+
+                        <div class="for-arrow">
+                            <select class="select" name="filter" id="filter">
+                                <option value="None">Filter</option>
+                                <option value="Art">Art</option>
+                                <option value="Clothes">Clothes</option>
+                                <option value="Games">Games</option>
+                                <option value="Phones">Phones</option>
+                            </select>
+                            <i class="far fa-chevron-down arrow"></i>
+                        </div>
+                    </section>
+                    <!--Section of buttons (addProduct, listView, gridView)) -->
+                    <section class="wrap-btn-view">
+                        <button id="btnAddProduct" class="btn btn-add">
+                            Add Product
+                        </button>
+                        <section class="list-grid">
+                            <button id="btnList" class="btn list">
+                                <i class="far fa-list"></i>
+                            </button>
+                            <button id="btnGrid" class="btn grid">
+                                <i class="far fa-border-all active"></i>
+                            </button>
+                        </section>
+                    </section>
+                </section>
+                <!--Section of Products List -->
+                <section id="product-list" class="wrap-product-list">
+                    <ul class="product-list">
+                        <li data-index="1">
+                            <div class="wrap-img">
+                                <img
+                                    class="img"
+                                    src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
+                                    alt=""
+                                />
+                                <div class="category">Art</div>
+                                <div class="edit">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="info-product">
+                                <div class="name-price">
+                                    <h3 class="name">
+                                        Fjallraven Foldsack Backpack Fjallraven
+                                        Foldsack Backpack
+                                    </h3>
+                                    <p class="price">$109.95</p>
+                                </div>
+                                <div class="add-cart">
+                                    <i class="far fa-cart-plus"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+
         <!-- start cart section -->
         <section id="cart-section" class="cart-section cart-hidden">
             <!-- start header cart -->
