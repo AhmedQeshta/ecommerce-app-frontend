@@ -50,12 +50,7 @@ toggleClass(btnCloseNav, navbarContent, "navbar-hidden");
 
 // Function  close Cart
 toggleClass(btnCloseCart, cartSection, "cart-hidden");
-
-// Function  open/close Cart
-// btnShowCart.addEventListener("click", () => {
-//     cartSection.classList.toggle("cart-hidden");
-// });
-
+// Function  show Cart
 toggleClass(btnShowCart, cartSection, "cart-hidden");
 
 // Function  Product Modal
