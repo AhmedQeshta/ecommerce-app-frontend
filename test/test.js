@@ -98,7 +98,7 @@ describe("Test Edit Product function", () => {
 
 describe("Test search Product function", () => {
     test("producst should be display that have name written ", () => {
-        const productList = [
+        let products = [
             {
                 id: 1,
                 name: "first",
@@ -115,7 +115,7 @@ describe("Test search Product function", () => {
             },
         ];
         const name = "First";
-        const actual = searchProduct(name);
+        const actual = searchProduct(name,products);
         const expected = [
             {
                 id: 1,
