@@ -45,8 +45,7 @@ function getElement(idName) {
 }
 
 const renderCart= () => {
-    if(cartItems.length === 0) cartContent.innerHTML ='There is no items yet'
-    else {
+    if(hasProduct()) {
         cartItems.forEach((item)=>{
             cartContent.innerHTML += ` <div class="item">
             <img
@@ -75,6 +74,9 @@ const renderCart= () => {
             </div>
         </div>`
         })
+    }
+    else {
+        cartContent.innerHTML ='There is no items yet'
     }
 }
 renderCart()
