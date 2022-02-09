@@ -67,6 +67,24 @@ img {
     object-fit: cover;
 }
 
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+    width: 0.8vw;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 10px;
+}
+
 /* ------------------------------------------------------------------
                     ***     Nav Bar Style        ***
 --------------------------------------------------------------------- */
