@@ -12,6 +12,7 @@
     opacity: 1;
     visibility: visible;
     transition: all ease-in-out 0.5s;
+    z-index: 12;
 }
 
 .cart-hidden {
