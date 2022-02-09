@@ -22,20 +22,7 @@ const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
-let cartItems = [{
-    "id": 1,
-    "name": "Fjallraven Foldsack Backpack",
-    "price": 109.95,
-    "category": "Art",
-    "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
-  },
-  {
-    "id": 2,
-    "name": "Casual Premium Slim Fit T-Shirts",
-    "price": 22.3,
-    "category": "Clothes",
-    "image": "https://images.unsplash.com/photo-1630750793977-b9189e00594f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
-  }];
+let cartItems = [];
 let isBuyer = true;
 
 // add event listener to buyer and seller buttons
