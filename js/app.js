@@ -31,12 +31,14 @@ let isBuyer = true;
 btnBuyer.addEventListener("click", () => {
     btnSellerMain.classList.remove("btn-active");
     btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
     userTyper(true);
     getProducts("products");
 });
 btnSeller.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
     userTyper(false);
     getProducts("products");
 });
@@ -44,6 +46,7 @@ btnSeller.addEventListener("click", () => {
 btnBuyerMain.addEventListener("click", () => {
     btnSellerMain.classList.remove("btn-active");
     btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
     userTyper(true);
     getProducts("products");
 });
@@ -51,6 +54,7 @@ btnBuyerMain.addEventListener("click", () => {
 btnSellerMain.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
     userTyper(false);
     getProducts("products");
 });
