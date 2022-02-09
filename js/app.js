@@ -12,6 +12,7 @@ const modalProductOverview = getElement("modal-product-overview");
 const cartContent=document.querySelector('.content-cart')
 const minusBtn=document.querySelector('.minus')
 const plusBtn=document.querySelector('.plus')
+const removeAll = document.querySelector('.remove-all')
 
 let cartItems=[]
 
@@ -24,7 +25,7 @@ let fetchData = () => {
         .then((productListJson) => render(productListJson));
 };
 fetchData();
-
+postProducts('cartItems',cartItems)
 // Function post Products to localStorage
 function postProducts(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
@@ -49,12 +50,7 @@ toggleClass(btnCloseNav, navbarContent, "navbar-hidden");
 
 // Function  close Cart
 toggleClass(btnCloseCart, cartSection, "cart-hidden");
-
-// Function  open/close Cart
-btnShowCart.addEventListener("click", () => {
-    cartSection.classList.toggle("cart-hidden");
-});
-
+// Function  show Cart
 toggleClass(btnShowCart, cartSection, "cart-hidden");
 
 // Function  Product Modal
@@ -73,7 +69,7 @@ function toggleClass(element, section, className) {
 function getElement(idName) {
     return document.getElementById(idName);
 }
-
+// function for render items in cart content
 const renderCart= () => {
     if(hasProduct(cartItems)) {
         cartItems.forEach((item)=>{
@@ -121,3 +117,8 @@ function hasProduct(productList) {
     }
     return true;
 }
+
+removeAll.addEventListener('click',()=>{
+    cartItems = []
+    postProducts('cartItems',cartItems)
+})
