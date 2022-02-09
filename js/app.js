@@ -422,3 +422,54 @@ window.onload = () => {
     productsList = getProducts("products");
     render(productsList);
 };
+
+// Create toggle view (grid, list)
+const item1 = document.querySelector(".product-list");
+const item2 = document.querySelector(".wrap-img");
+const item3 = document.querySelector(".img");
+const item4 = document.querySelector(".info-product");
+const item5 = document.querySelector(".name");
+const item6 = document.querySelector(".price");
+
+const btnList = document.querySelector("#btnList");
+const btnGrid = document.querySelector("#btnGrid");
+
+btnList.addEventListener('click',()=>{
+    item1.classList.remove('product-list')
+    item1.classList.add('product-list-list')
+    
+    item2.classList.remove('wrap-img')
+    item2.classList.add('wrap-img-list')
+    
+    item3.classList.remove('img')
+    item3.classList.add('img-list')
+    
+    item4.classList.remove('info-product')
+    item4.classList.add('info-product-list')
+    
+    item5.classList.remove('name')
+    item5.classList.add('name-list')
+    
+    item6.classList.remove('price')
+    item6.classList.add('price-list')
+})
+
+btnGrid.addEventListener('click',()=>{
+    item1.classList.remove('product-list-list')
+    item1.classList.add('product-list')
+    
+    item2.classList.remove('wrap-img-list')
+    item2.classList.add('wrap-img')
+    
+    item3.classList.remove('img-list')
+    item3.classList.add('img')
+    
+    item4.classList.remove('info-product-list')
+    item4.classList.add('info-product')
+    
+    item5.classList.remove('name-list')
+    item5.classList.add('name')
+    
+    item6.classList.remove('price-list')
+    item6.classList.add('price')
+})
