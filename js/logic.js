@@ -59,7 +59,7 @@ const sortProductList = [
 
 // logic For Add Products
 const addProduct = (newProduct) => {
-    if (newProduct == undefined) {
+    if (newProduct === undefined) {
         return productList;
     } else {
         return [...productList, newProduct];
@@ -68,7 +68,7 @@ const addProduct = (newProduct) => {
 
 // logic For Delete Products
 const deleteProduct = (indexProduct) => {
-    if (indexProduct == undefined) {
+    if (indexProduct === undefined) {
         return beforeDeleteProductList;
     } else {
         beforeDeleteProductList.splice(indexProduct, 1);
@@ -116,12 +116,58 @@ const sortProduct = (sortType) => {
     }
 };
 
-module.exports = {
-    addProduct,
-    deleteProduct,
-    beforeDeleteProductList,
-    editProduct,
-    searchProduct,
-    filterProduct,
-    sortProduct,
+// ------ *** --------  convert data product to object   -------- *** --------
+const convertToObject = (id, name, price, category, image) => {
+    return {
+        id,
+        name,
+        price,
+        category,
+        image,
+    };
 };
+
+// ------ *** --------       Convert array to String        -------- *** --------
+const convertArrayToString = (array)=>{
+    return JSON.stringify(array)
+ }
+
+ // ------ *** --------      Reverse Convert array to String        -------- *** --------
+ const convertStringArrayToArray = (stringArray)=>{
+    return JSON.parse(stringArray)
+ }
+
+// ------ *** --------  Function Save data in local storage      -------- *** --------
+const storeArrayDataOf = (nameLocalStorage,products)=>{
+    localStorage.setItem(nameLocalStorage,products)
+}
+
+
+// ------ *** --------        Check Form Data            -------- *** --------
+const checkFormData = (name, price, category, image) => {
+    let isValid = false;
+    if(name === '' || price ===''|| category ===''||image ===''){
+        isValid = false;
+    }else{
+        isValid = true;
+    }
+    return isValid;
+};
+
+
+
+if (typeof module !== "undefined") {
+    module.exports = {
+        addProduct,
+        deleteProduct,
+        beforeDeleteProductList,
+        editProduct,
+        searchProduct,
+        filterProduct,
+        sortProduct,
+        convertToObject,
+        convertArrayToString,
+        convertStringArrayToArray,
+        checkFormData
+    };
+}
