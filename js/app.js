@@ -11,6 +11,12 @@ const modalProductOverview = getElement("modal-product-overview");
 const btnAddProduct = document.getElementById("btnAddProduct");
 const btnBuyer = document.querySelector(".btn-modal-buyer");
 const btnSeller = document.querySelector(".btn-modal-seller");
+const cartContent = document.querySelector(".content-cart");
+const minusBtn = document.querySelector(".minus");
+const plusBtn = document.querySelector(".plus");
+const removeAll = document.querySelector(".remove-all");
+
+let cartItems = [];
 let isBuyer = true;
 
 // add event listener to buyer and seller buttons
@@ -35,6 +41,12 @@ if (localStorage.getItem("popState") !== "shown") {
     });
 }
 
+// Function post Products to localStorage
+function postProducts(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+    getProducts(key);
+}
+
 //Import data from JSON files
 let fetchData = () => {
     fetch("../data/products.json")
@@ -44,12 +56,6 @@ let fetchData = () => {
         .then((productListJson) => render(productListJson));
 };
 fetchData();
-
-// Function post Products to localStorage
-function postProducts(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-    getProducts(key);
-}
 
 // Function get Products from localStorage
 function getProducts(key) {
@@ -69,12 +75,7 @@ toggleClass(btnCloseNav, navbarContent, "navbar-hidden");
 
 // Function  close Cart
 toggleClass(btnCloseCart, cartSection, "cart-hidden");
-
-// Function  open/close Cart
-btnShowCart.addEventListener("click", () => {
-    cartSection.classList.toggle("cart-hidden");
-});
-
+// Function  show Cart
 toggleClass(btnShowCart, cartSection, "cart-hidden");
 
 // Function  Product Modal
@@ -180,3 +181,48 @@ function render(productList) {
         });
     }
 }
+
+// function for render items in cart content
+const renderCart = () => {
+    if (hasProduct(cartItems)) {
+        cartItems.forEach((item) => {
+            cartContent.innerHTML += ` <div class="item">
+            <img
+                src="${item.image}"
+                alt="${item.name}"
+            />
+            <div class="info-item">
+                <div class="data">
+                    <h3 class="name-item">
+                    ${item.name}
+                    </h3>
+                    <h3 class="price-item">$ ${item.price}</h3>
+                </div>
+                <div class="data">
+                    <div class="quentity">
+                        <button class="minus" >
+                            <i class="far fa-minus"></i>
+                        </button>
+                        <span class="quantity-number">1</span>
+                        <button class="plus" >
+                            <i class="far fa-plus"></i>
+                        </button>
+                    </div>
+                    <h4 class="remove">Remove</h4>
+                </div>
+            </div>
+        </div>`;
+        });
+    } else {
+        cartContent.innerHTML = "There is no items yet";
+    }
+};
+
+postProducts("cartItems", cartItems);
+renderCart();
+
+// Remove all product from cart
+removeAll.addEventListener("click", () => {
+    cartItems = [];
+    postProducts("cartItems", cartItems);
+});
