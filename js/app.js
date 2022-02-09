@@ -6,9 +6,9 @@ const btnCloseNav = document.getElementById("btn-close-navbar");
 const cartSection = document.getElementById("cart-section");
 const btnCloseCart = document.getElementById("btn-close-cart");
 const btnShowCart = document.getElementById("btn-shopping-bag");
-const modalCreateProduct = getElement("modal-create-product");
-const btnCloseProductModal = getElement("close-product-modal");
-const modalProductOverview = getElement("modal-product-overview");
+const modalCreateProduct = document.getElementById("modal-create-product");
+const btnCloseProductModal = document.getElementById("close-product-modal");
+const modalProductOverview = document.getElementById("modal-product-overview");
 const btnAddProduct = document.getElementById("btnAddProduct");
 const sort = document.getElementById("sort");
 const filter = document.getElementById("filter");
@@ -27,6 +27,12 @@ const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 const numberItems =document.querySelector('.number-items')
 const numberNavbar =document.querySelector('.count-cart')
+const addProductTitle = document.getElementById("add-product-title");
+
+let isCreate = true;
+let INDEX_PRODUCT_GLOBAL;
+let idProduct;
+
 let productsList;
 let isBuyer = true;
 let cartItems ;
@@ -134,24 +140,17 @@ function toggleClass(element, section, className) {
     });
 }
 
-// ------ Function to get Element by id ---------
-function getElement(idName) {
-    return document.getElementById(idName);
-}
-
 // --------------- Function to add Product ------------------
 
 btnSubmitFormProduct.addEventListener("click", () =>
     SubmitFormToCreateProduct()
 );
 
-// ------ *** --------      Submit Form To Create Product       -------- *** --------
-let newListProducts;
-if (localStorage.product != null) {
-    newListProducts = convertStringArrayToArray(localStorage.product);
-} else {
-    newListProducts = [];
-}
+btnAddProduct.addEventListener("click", () => {
+    cleanInputForm();
+    modalCreateProduct.classList.toggle("modal-hidden");
+});
+
 
 const SubmitFormToCreateProduct = () => {
     if (
@@ -163,7 +162,7 @@ const SubmitFormToCreateProduct = () => {
         )
     ) {
         // ------ *** --------  convert data product to object   -------- *** --------
-        let id = Math.floor(Math.random() * 999);
+        let id = idProduct || Math.floor(Math.random() * 999);
         let newProductObject = convertToObject(
             id,
             productName.value,
@@ -171,12 +170,13 @@ const SubmitFormToCreateProduct = () => {
             productPrice.value,
             productImageUrl.value
         );
-
-        // ------ *** --------   push a abject to new array      -------- *** --------
-        productsList.push(newProductObject);
-
-        // ------ *** --------   Save data in local storage      -------- *** --------
-        // storeArrayDataOf("product", convertArrayToString(newListProducts));
+        if (isCreate) {
+            // ------ *** --------   push a abject to new array      -------- *** --------
+            productsList.push(newProductObject);
+        } else {
+            // ------ *** --------   update a abject to new array      -------- *** --------
+            productsList[INDEX_PRODUCT_GLOBAL] = newProductObject;
+        }
         postProducts("products", productsList);
         let products = getProducts("products");
 
@@ -197,7 +197,12 @@ const cleanInputForm = () => {
     productCategory.value = "";
     productPrice.value = "";
     productImageUrl.value = "";
+    INDEX_PRODUCT_GLOBAL = "";
+    idProduct = "";
     modalCreateProduct.classList.add("modal-hidden");
+    btnSubmitFormProduct.innerHTML = "Add Product";
+    addProductTitle.innerHTML = "Add more products to sell more ";
+    isCreate = true;
 };
 
 // Function Check if the product list has a product
@@ -238,7 +243,9 @@ function render(productList) {
             if (!isBuyer) {
                 edit.setAttribute("data-index", order);
                 edit.className = "edit";
-                edit.addEventListener("click", () => editProductDom(product));
+                edit.addEventListener("click", () =>
+                    editProductDom(product, order++)
+                );
                 iconForEdit.className = "fa fa-pencil";
                 edit.appendChild(iconForEdit);
                 wrapImg.appendChild(edit);
@@ -440,6 +447,26 @@ function lengthItems(){
 }
 lengthItems()
 
+// ------------------------ *** Function For delete product *** ------------------
+function editProductDom({ id, name, category, price, image }, indexProduct) {
+    // For delete product form array
+
+    // Show Form Edit
+    modalCreateProduct.classList.remove("modal-hidden");
+    btnSubmitFormProduct.innerHTML = "Update Product";
+    addProductTitle.innerHTML = "Update your product";
+
+    // Get Form Edit data (old-data)
+    idProduct = id;
+    productName.value = name;
+    productCategory.value = category;
+    productPrice.value = price;
+    productImageUrl.value = image;
+    INDEX_PRODUCT_GLOBAL = indexProduct;
+
+    isCreate = false;
+}
+
 // Get Products when the user reload the page
 window.onload = () => {
     productsList = getProducts("products");
@@ -448,3 +475,68 @@ window.onload = () => {
     renderCart(cartItems)
     totalPrice()
 };
+
+// Create toggle view (grid, list)
+const item1 = document.querySelector(".product-list");
+const item2 = document.querySelector(".wrap-img");
+const item3 = document.querySelector(".img");
+const item4 = document.querySelector(".info-product");
+const item5 = document.querySelector(".name");
+const item6 = document.querySelector(".price");
+
+const btnList = document.querySelector("#btnList");
+const btnGrid = document.querySelector("#btnGrid");
+
+btnList.addEventListener("click", () => {
+    const item1 = document.querySelector(".product-list");
+    const item2 = document.querySelector(".wrap-img");
+    const item3 = document.querySelector(".img");
+    const item4 = document.querySelector(".info-product");
+    const item5 = document.querySelector(".name");
+    const item6 = document.querySelector(".price");
+
+    item1.classList.remove("product-list");
+    item1.classList.add("product-list-list");
+
+    item2.classList.remove("wrap-img");
+    item2.classList.add("wrap-img-list");
+
+    item3.classList.remove("img");
+    item3.classList.add("img-list");
+
+    item4.classList.remove("info-product");
+    item4.classList.add("info-product-list");
+
+    item5.classList.remove("name");
+    item5.classList.add("name-list");
+
+    item6.classList.remove("price");
+    item6.classList.add("price-list");
+});
+
+btnGrid.addEventListener("click", () => {
+    const item1 = document.querySelector(".product-list-list");
+    const item2 = document.querySelector(".wrap-img-list");
+    const item3 = document.querySelector(".img-list");
+    const item4 = document.querySelector(".info-product-list");
+    const item5 = document.querySelector(".name-list");
+    const item6 = document.querySelector(".price-list");
+
+    item1.classList.remove("product-list-list");
+    item1.classList.add("product-list");
+
+    item2.classList.remove("wrap-img-list");
+    item2.classList.add("wrap-img");
+
+    item3.classList.remove("img-list");
+    item3.classList.add("img");
+
+    item4.classList.remove("info-product-list");
+    item4.classList.add("info-product");
+
+    item5.classList.remove("name-list");
+    item5.classList.add("name");
+
+    item6.classList.remove("price-list");
+    item6.classList.add("price");
+});
