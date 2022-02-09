@@ -109,8 +109,8 @@ button {
     width: 100%;
     padding: 0 50px;
     position: fixed;
+    z-index: 999;
 }
-
 .logo {
     flex: 10%;
     display: flex;
@@ -251,6 +251,7 @@ button {
 
 .fa-bars {
     display: none;
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------
@@ -258,7 +259,7 @@ button {
 --------------------------------------------------------------------- */
 .container {
     position: absolute;
-    left: calc(10vw/2);
+    left: calc(10vw / 2);
     top: 10vh;
     width: 90vw;
     margin-top: 20px;
