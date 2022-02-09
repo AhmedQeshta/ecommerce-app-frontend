@@ -170,16 +170,18 @@ const SubmitFormToCreateProduct = () => {
         );
 
         // ------ *** --------   push a abject to new array      -------- *** --------
-        newListProducts.push(newProductObject);
+        productsList.push(newProductObject);
 
         // ------ *** --------   Save data in local storage      -------- *** --------
-        storeArrayDataOf("product", convertArrayToString(newListProducts));
+        // storeArrayDataOf("product", convertArrayToString(newListProducts));
+        postProducts("products", productsList);
+        let products = getProducts("products");
 
         // ------ *** --------   Clean data After send and close modal     -------- *** --------
         cleanInputForm();
 
         // ------ *** --------   Refresh dom to render dom       -------- *** --------
-        getProducts("product");
+        render(products);
     } else {
         alert("Input is not Valid");
     }
@@ -401,13 +403,14 @@ removeAll.addEventListener("click", () => {
 // ------------------------ *** Function For delete product *** ------------------
 function deleteProductDom(object, indexProduct) {
     // For delete product form array
-    newListProducts.splice(indexProduct, 1);
+    productsList.splice(indexProduct, 1);
 
     // ------ *** --------   Save data in local storage      -------- *** --------
-    storeArrayDataOf("product", convertArrayToString(newListProducts));
-    // ------ *** --------   Refresh dom to render dom       -------- *** --------
+    postProducts("products", productsList);
+    let products = getProducts("products");
 
-    getProducts("product");
+    // ------ *** --------   Refresh dom to render dom       -------- *** --------
+    render(products);
 }
 //add item to carts 
 if (localStorage.cartItems != null) {
