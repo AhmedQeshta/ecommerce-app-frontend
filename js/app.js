@@ -1,3 +1,4 @@
+// ------ *** --------       Get Data From Dom   (Element)       -------- *** --------
 const closeModal = document.getElementById("close-modal");
 const modalStarter = document.getElementById("modal-starter");
 const navbarContent = document.getElementById("navbar-content");
@@ -15,6 +16,11 @@ const cartContent = document.querySelector(".content-cart");
 const minusBtn = document.querySelector(".minus");
 const plusBtn = document.querySelector(".plus");
 const removeAll = document.querySelector(".remove-all");
+const productName = getElement("name");
+const productCategory = getElement("category");
+const productPrice = getElement("product-price");
+const productImageUrl = getElement("image-url");
+const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
 let cartItems = [];
 let isBuyer = true;
@@ -48,14 +54,20 @@ function postProducts(key, data) {
 }
 
 //Import data from JSON files
-let fetchData = () => {
-    fetch("../data/products.json")
-        .then((response) => {
-            return response.json();
-        })
-        .then((productListJson) => render(productListJson));
-};
-fetchData();
+// let fetchData = () => {
+//     fetch("../data/products.json")
+//         .then((response) => {
+//             return response.json();
+//         })
+//         .then((productListJson) => render(productListJson));
+// };
+// fetchData();
+postProducts("cartItems", cartItems);
+// Function post Products to localStorage
+function postProducts(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+    getProducts(key);
+}
 
 // Function get Products from localStorage
 function getProducts(key) {
@@ -94,6 +106,66 @@ function toggleClass(element, section, className) {
 function getElement(idName) {
     return document.getElementById(idName);
 }
+
+// --------------- Function to add Product ------------------
+
+
+btnSubmitFormProduct.addEventListener("click", () =>
+    SubmitFormToCreateProduct()
+);
+
+// ------ *** --------      Submit Form To Create Product       -------- *** --------
+let newListProducts;
+if (localStorage.product != null) {
+    newListProducts = convertStringArrayToArray(localStorage.product);
+} else {
+    newListProducts = [];
+}
+
+const SubmitFormToCreateProduct = () => {
+    if (
+        checkFormData(
+            productName.value,
+            productCategory.value,
+            productPrice.value,
+            productImageUrl.value
+        )
+    ) {
+        // ------ *** --------  convert data product to object   -------- *** --------
+        let id = Math.floor(Math.random() * 999);
+        let newProductObject = convertToObject(
+            id,
+            productName.value,
+            productCategory.value,
+            productPrice.value,
+            productImageUrl.value
+        );
+
+        // ------ *** --------   push a abject to new array      -------- *** --------
+        newListProducts.push(newProductObject);
+
+        // ------ *** --------   Save data in local storage      -------- *** --------
+        storeArrayDataOf("product", convertArrayToString(newListProducts));
+
+        // ------ *** --------   Clean data After send and close modal     -------- *** --------
+        cleanInputForm();
+
+        // ------ *** --------   Refresh dom to render dom       -------- *** --------
+        getProducts("product");
+    } else {
+        alert("Input is not Valid");
+    }
+};
+
+getProducts("product");
+
+const cleanInputForm = () => {
+    productName.value = "";
+    productCategory.value = "";
+    productPrice.value = "";
+    productImageUrl.value = "";
+    modalCreateProduct.classList.add("modal-hidden");
+};
 
 // Function Check if the product list has a product
 function hasProduct(productList) {
@@ -217,6 +289,24 @@ const renderCart = () => {
         cartContent.innerHTML = "There is no items yet";
     }
 };
+
+renderCart();
+// Function Check if the product list has a product
+function hasProduct(productList) {
+    if (
+        productList.length == 0 ||
+        productList == undefined ||
+        productList == null
+    ) {
+        return false;
+    }
+    return true;
+}
+
+removeAll.addEventListener("click", () => {
+    cartItems = [];
+    postProducts("cartItems", cartItems);
+});
 
 postProducts("cartItems", cartItems);
 renderCart();

@@ -109,7 +109,7 @@ button {
     width: 100%;
     padding: 0 50px;
     position: fixed;
-    z-index: 20;
+    z-index: 999;
 }
 .logo {
     flex: 10%;

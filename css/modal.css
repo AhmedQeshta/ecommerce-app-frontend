@@ -139,6 +139,7 @@ modal style add product
     position: relative;
     height: 100vh;
     transition: all 0.5s ease-in-out;
+    z-index: 99;
 }
 
 .modal-hidden {
