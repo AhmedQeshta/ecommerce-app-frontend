@@ -25,13 +25,15 @@ const productCategory = getElement("category");
 const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
-
+const numberItems =document.querySelector('.number-items')
 let productsList;
-let cartItems = [];
+let cartItems ;
 let isBuyer = true;
 
 productsList = getProducts("products");
 render(productsList);
+cartItems  = getProducts("cartItems ");
+renderCart(cartItems );
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
@@ -281,7 +283,7 @@ function render(productList) {
 }
 
 // function for render items in cart content
-const renderCart = () => {
+ function renderCart(cartItems) {
     if (hasProduct(cartItems)) {
         cartItems.forEach((item, i) => {
             cartContent.innerHTML += ` <div class="item" id="index-${i}">
@@ -315,8 +317,6 @@ const renderCart = () => {
         cartContent.innerHTML = "There is no items yet";
     }
 };
-postProducts("cartItems", cartItems);
-renderCart();
 // Function Check if the product list has a product
 function hasProduct(productList) {
     if (
@@ -374,16 +374,12 @@ sort.addEventListener("click", () => {
 
 const totalPrice = () => {
     let items = document.querySelectorAll(".item");
-    console.log(items);
     let total = document.getElementById("total-number");
-    // console.log(total)
     let sum = 0;
     for (let i = 0; i < items.length; i++) {
         let item = items[i];
         let priceElement = item.querySelector(".price-item");
-        console.log(priceElement);
         let quantity = item.querySelector(".quantity-number").textContent;
-        console.log(quantity);
         let price = priceElement.textContent;
         price = parseFloat(price.replace("$", ""));
         sum = sum + price * quantity;
@@ -393,8 +389,8 @@ const totalPrice = () => {
 };
 totalPrice();
 
-postProducts("cartItems", cartItems);
-renderCart();
+// postProducts("cartItems", cartItems);
+// renderCart(cartItems);
 
 // Remove all product from cart
 removeAll.addEventListener("click", () => {
@@ -413,6 +409,24 @@ function deleteProductDom(object, indexProduct) {
 
     getProducts("product");
 }
+//add item to carts 
+if (localStorage.cartItems != null) {
+    cartItems = JSON.stringify(localStorage.cartItems);
+} else {
+    cartItems = [];
+}
+function addToCartDom(product) {
+    product.quantity = 1
+    cartItems.push(product)
+    // renderCart(cartItems)
+    postProducts("cartItems", cartItems);
+}
+//length items in the cart 
+function lengthItems(cartItems){
+    numberItems.textContent =`(${cartItems.length} items)`
+}
+lengthItems()
+console.log(cartItems)
 
 // Get Products when the user reload the page
 window.onload = () => {
