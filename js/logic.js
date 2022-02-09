@@ -57,14 +57,7 @@ const sortProductList = [
     },
 ];
 
-// logic For Add Products
-const addProduct = (newProduct) => {
-    if (newProduct === undefined) {
-        return productList;
-    } else {
-        return [...productList, newProduct];
-    }
-};
+
 
 // logic For Delete Products
 const deleteProduct = (indexProduct) => {
@@ -155,7 +148,6 @@ const checkFormData = (name, price, category, image) => {
 
 if (typeof module !== "undefined") {
     module.exports = {
-        addProduct,
         deleteProduct,
         beforeDeleteProductList,
         editProduct,

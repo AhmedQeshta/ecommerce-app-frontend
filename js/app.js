@@ -53,15 +53,7 @@ function postProducts(key, data) {
     getProducts(key);
 }
 
-//Import data from JSON files
-// let fetchData = () => {
-//     fetch("../data/products.json")
-//         .then((response) => {
-//             return response.json();
-//         })
-//         .then((productListJson) => render(productListJson));
-// };
-// fetchData();
+
 postProducts("cartItems", cartItems);
 // Function post Products to localStorage
 function postProducts(key, data) {
