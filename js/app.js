@@ -255,10 +255,10 @@ function render(productList) {
 }
 
 // function for render items in cart content
-const renderCart = () => {
-    if (hasProduct(cartItems)) {
-        cartItems.forEach((item) => {
-            cartContent.innerHTML += ` <div class="item">
+const renderCart= () => {
+    if(hasProduct(cartItems)) {
+        cartItems.forEach((item,i)=>{
+            cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
                 src="${item.image}"
                 alt="${item.name}"
@@ -272,11 +272,11 @@ const renderCart = () => {
                 </div>
                 <div class="data">
                     <div class="quentity">
-                        <button class="minus" >
+                        <button class="minus" onclick="decrement(${i})" >
                             <i class="far fa-minus"></i>
                         </button>
-                        <span class="quantity-number">1</span>
-                        <button class="plus" >
+                        <span class="quantity-number"  >1</span>
+                        <button class="plus" onclick="increment(${i})" >
                             <i class="far fa-plus"></i>
                         </button>
                     </div>
@@ -289,7 +289,7 @@ const renderCart = () => {
         cartContent.innerHTML = "There is no items yet";
     }
 };
-
+postProducts("cartItems", cartItems);
 renderCart();
 // Function Check if the product list has a product
 function hasProduct(productList) {
@@ -302,17 +302,25 @@ function hasProduct(productList) {
     }
     return true;
 }
+//remove all items from cart and from local storage
+removeAll.addEventListener('click',()=>{
+    cartItems = []
+    postProducts('cartItems',cartItems)
+})
+//increment quantity function 
+const increment = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    quantity.textContent =  parseInt(quantity.textContent) + 1
+}
+//decrement quantity function 
+const decrement = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    if (parseInt(quantity.textContent) ===1) {
+        quantity.textContent =1
+    }
+    else {
+        quantity.textContent =  parseInt(quantity.textContent) -1
+    }
+  
+}
 
-removeAll.addEventListener("click", () => {
-    cartItems = [];
-    postProducts("cartItems", cartItems);
-});
-
-postProducts("cartItems", cartItems);
-renderCart();
-
-// Remove all product from cart
-removeAll.addEventListener("click", () => {
-    cartItems = [];
-    postProducts("cartItems", cartItems);
-});
