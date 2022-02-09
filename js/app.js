@@ -15,6 +15,32 @@ const plusBtn=document.querySelector('.plus')
 
 let cartItems=[]
 
+//Import data from JSON files
+let fetchData = () => {
+    fetch("../data/products.json")
+        .then((response) => {
+            return response.json();
+        })
+        .then((productListJson) => render(productListJson));
+};
+fetchData();
+
+// Function post Products to localStorage
+function postProducts(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+    getProducts(key);
+}
+
+// Function get Products from localStorage
+function getProducts(key) {
+    data =
+        localStorage.getItem(key) === null
+            ? []
+            : JSON.parse(localStorage.getItem(key));
+    render(data);
+    return data;
+}
+
 // Function  close Modal
 toggleClass(closeModal, modalStarter, "modal-hidden");
 
@@ -25,6 +51,10 @@ toggleClass(btnCloseNav, navbarContent, "navbar-hidden");
 toggleClass(btnCloseCart, cartSection, "cart-hidden");
 
 // Function  open/close Cart
+btnShowCart.addEventListener("click", () => {
+    cartSection.classList.toggle("cart-hidden");
+});
+
 toggleClass(btnShowCart, cartSection, "cart-hidden");
 
 // Function  Product Modal
@@ -80,3 +110,14 @@ const renderCart= () => {
     }
 }
 renderCart()
+// Function Check if the product list has a product
+function hasProduct(productList) {
+    if (
+        productList.length == 0 ||
+        productList == undefined ||
+        productList == null
+    ) {
+        return false;
+    }
+    return true;
+}
