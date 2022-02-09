@@ -26,15 +26,14 @@ const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 const numberItems =document.querySelector('.number-items')
+const numberNavbar =document.querySelector('.count-cart')
 let productsList;
-let cartItems ;
 let isBuyer = true;
+let cartItems ;
 
+cartItems=getProducts('cartItems');
 productsList = getProducts("products");
 render(productsList);
-cartItems  = getProducts("cartItems ");
-renderCart(cartItems );
-
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
     btnSellerMain.classList.remove("btn-active");
@@ -101,10 +100,14 @@ function postProducts(key, data) {
 
 // Function get Products from localStorage
 function getProducts(key) {
-    data =
-        localStorage.getItem(key) === null
-            ? []
-            : JSON.parse(localStorage.getItem(key));
+    // data =
+    //     localStorage.getItem(key) === null
+    //         ? []
+    //         : JSON.parse(localStorage.getItem(key));
+            data =
+            localStorage.getItem(key) == undefined
+                ? []
+                : JSON.parse(localStorage.getItem(key));
     return data;
 }
 
@@ -287,6 +290,7 @@ function render(productList) {
 // function for render items in cart content
  function renderCart(cartItems) {
     if (hasProduct(cartItems)) {
+        cartContent.innerHTML= ''
         cartItems.forEach((item, i) => {
             cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
@@ -398,6 +402,7 @@ totalPrice();
 removeAll.addEventListener("click", () => {
     cartItems = [];
     postProducts("cartItems", cartItems);
+    renderCart(getProducts('cartItems'))
 });
 
 // ------------------------ *** Function For delete product *** ------------------
@@ -413,26 +418,33 @@ function deleteProductDom(object, indexProduct) {
     render(products);
 }
 //add item to carts 
-if (localStorage.cartItems != null) {
-    cartItems = JSON.stringify(localStorage.cartItems);
-} else {
-    cartItems = [];
-}
+// if (localStorage.cartItems != null) {
+//     cartItems = JSON.stringify(localStorage.cartItems);
+// } else {
+//     cartItems = [];
+// }
+
 function addToCartDom(product) {
-    product.quantity = 1
+    cartItems=getProducts('cartItems') || []
+    product.quantity = 1 
     cartItems.push(product)
-    // renderCart(cartItems)
     postProducts("cartItems", cartItems);
+    renderCart(getProducts('cartItems'))
+    totalPrice()
+    lengthItems()
 }
 //length items in the cart 
-function lengthItems(cartItems){
-    numberItems.textContent =`(${cartItems.length} items)`
+function lengthItems(){
+    numberItems.textContent =`(${getProducts('cartItems').length} items)`
+    numberNavbar.textContent =`${getProducts('cartItems').length}`
 }
 lengthItems()
-console.log(cartItems)
 
 // Get Products when the user reload the page
 window.onload = () => {
     productsList = getProducts("products");
     render(productsList);
+    cartItems=getProducts('cartItems') || []
+    renderCart(cartItems)
+    totalPrice()
 };
