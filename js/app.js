@@ -25,8 +25,8 @@ const productCategory = document.getElementById("category");
 const productPrice = document.getElementById("product-price");
 const productImageUrl = document.getElementById("image-url");
 const btnSubmitFormProduct = document.getElementById("btn-submit-form-product");
-const numberItems = document.querySelector(".number-items");
-const numberNavbar = document.querySelector(".count-cart");
+const numberItems =document.querySelector('.number-items')
+const numberNavbar =document.querySelector('.count-cart')
 const addProductTitle = document.getElementById("add-product-title");
 
 let isCreate = true;
@@ -320,7 +320,7 @@ function renderCart(cartItems) {
                             <i class="far fa-plus"></i>
                         </button>
                     </div>
-                    <h4 class="remove">Remove</h4>
+                    <h4 class="remove" onclick="deleteItem(${i})">Remove</h4>
                 </div>
             </div>
         </div>`;
@@ -423,13 +423,8 @@ function deleteProductDom(object, indexProduct) {
     // ------ *** --------   Refresh dom to render dom       -------- *** --------
     render(products);
 }
-//add item to carts
-// if (localStorage.cartItems != null) {
-//     cartItems = JSON.stringify(localStorage.cartItems);
-// } else {
-//     cartItems = [];
-// }
 
+//add item to carts 
 function addToCartDom(product) {
     cartItems = getProducts("cartItems") || [];
     product.quantity = 1;
@@ -545,3 +540,13 @@ btnGrid.addEventListener("click", () => {
     item6.classList.remove("price-list");
     item6.classList.add("price");
 });
+
+//function delete item from cart 
+function deleteItem(i) {
+    cartItems=getProducts('cartItems') || []
+    cartItems.splice(i,1)
+    postProducts("cartItems", cartItems);
+    renderCart(getProducts('cartItems'))
+    totalPrice()
+    lengthItems()
+}
