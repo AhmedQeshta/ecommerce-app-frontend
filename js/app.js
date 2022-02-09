@@ -22,7 +22,20 @@ const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
-let cartItems = [];
+let cartItems = [{
+    "id": 1,
+    "name": "Fjallraven Foldsack Backpack",
+    "price": 109.95,
+    "category": "Art",
+    "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80"
+  },
+  {
+    "id": 2,
+    "name": "Casual Premium Slim Fit T-Shirts",
+    "price": 22.3,
+    "category": "Clothes",
+    "image": "https://images.unsplash.com/photo-1630750793977-b9189e00594f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
+  }];
 let isBuyer = true;
 
 // add event listener to buyer and seller buttons
@@ -275,7 +288,7 @@ const renderCart= () => {
                         <button class="minus" onclick="decrement(${i})" >
                             <i class="far fa-minus"></i>
                         </button>
-                        <span class="quantity-number"  >1</span>
+                        <span class="quantity-number">1</span>
                         <button class="plus" onclick="increment(${i})" >
                             <i class="far fa-plus"></i>
                         </button>
@@ -310,7 +323,8 @@ removeAll.addEventListener('click',()=>{
 //increment quantity function 
 const increment = (i) => {
     let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
-    quantity.textContent =  parseInt(quantity.textContent) + 1
+    quantity.textContent =  parseInt(quantity.textContent) + 1 ;
+    totalPrice()
 }
 //decrement quantity function 
 const decrement = (i) => {
@@ -321,6 +335,28 @@ const decrement = (i) => {
     else {
         quantity.textContent =  parseInt(quantity.textContent) -1
     }
+    totalPrice()
   
 }
 
+const totalPrice = () =>{
+    let items = document.querySelectorAll('.item')
+    console.log(items)
+    let total= document.getElementById('total-number')
+    // console.log(total)
+    let sum = 0
+   for (let i =0 ; i<items.length;i++){
+       let item=items[i]
+        let priceElement = item.querySelector('.price-item')
+        console.log(priceElement)
+        let quantity =item.querySelector('.quantity-number').textContent
+        console.log(quantity)
+        let price = priceElement.textContent;
+         price=parseFloat(price.replace('$',''))
+         sum = sum+(price*quantity) 
+    }
+    total.innerText=sum.toFixed(2) +"$"
+    postProducts("total", sum);
+
+}
+totalPrice()
