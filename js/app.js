@@ -16,6 +16,8 @@ const cartContent = document.querySelector(".content-cart");
 const minusBtn = document.querySelector(".minus");
 const plusBtn = document.querySelector(".plus");
 const removeAll = document.querySelector(".remove-all");
+const btnBuyerMain = document.querySelector(".btn-buyer");
+const btnSellerMain = document.querySelector(".btn-seller");
 const productName = getElement("name");
 const productCategory = getElement("category");
 const productPrice = getElement("product-price");
@@ -27,10 +29,34 @@ let isBuyer = true;
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
+    btnSellerMain.classList.remove("btn-active");
+    btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
     userTyper(true);
+    getProducts("products");
 });
 btnSeller.addEventListener("click", () => {
+    btnBuyerMain.classList.remove("btn-active");
+    btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
     userTyper(false);
+    getProducts("products");
+});
+
+btnBuyerMain.addEventListener("click", () => {
+    btnSellerMain.classList.remove("btn-active");
+    btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
+    userTyper(true);
+    getProducts("products");
+});
+
+btnSellerMain.addEventListener("click", () => {
+    btnBuyerMain.classList.remove("btn-active");
+    btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
+    userTyper(false);
+    getProducts("products");
 });
 
 // Function to check if the user buyer or seller
@@ -108,7 +134,6 @@ function getElement(idName) {
 }
 
 // --------------- Function to add Product ------------------
-
 
 btnSubmitFormProduct.addEventListener("click", () =>
     SubmitFormToCreateProduct()
