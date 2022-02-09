@@ -45,7 +45,7 @@ function getElement(idName) {
 }
 
 const renderCart= () => {
-    if(hasProduct()) {
+    if(hasProduct(cartItems)) {
         cartItems.forEach((item)=>{
             cartContent.innerHTML += ` <div class="item">
             <img
