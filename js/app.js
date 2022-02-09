@@ -157,6 +157,8 @@ const SubmitFormToCreateProduct = () => {
     }
 };
 
+getProducts("product");
+
 const cleanInputForm = () => {
     productName.value = "";
     productCategory.value = "";
