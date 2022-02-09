@@ -1,71 +1,9 @@
 /* ------------------------------------------------------------------
                           [Table of contents]
-         ***     01.  ===>   Root Variable    ***
-         ***     02.  ===>   Global Style    ***
-         ***     03.  ===>   modules modal    ***
-         ***     04.  ===>       ***
+         ***     01.  ===>   Global Style    ***
+         ***     02.  ===>   modules modal    ***
+         ***     03.  ===>       ***
 --------------------------------------------------------------------- */
-
-/* Root Variable */
-:root {
-    --primary: #e55f34;
-    --background: #f8f8f8;
-    --secondary: #fef7f5;
-    --white: #ffffff;
-}
-
-/* ------------------------------------------------------------------
-                    ***     Global Style        ***
---------------------------------------------------------------------- */
-*,
-*::after,
-*::before {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-family: "Manrope", sans-serif;
-}
-body {
-    font-family: "Manrope", sans-serif;
-}
-
-p,
-div {
-    margin: 0;
-}
-
-li,
-ul,
-ol {
-    list-style: none;
-}
-
-button,
-button:focus,
-input,
-input:focus textarea,
-textarea:focus {
-    outline: none;
-    border: none;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    text-decoration: none;
-}
-
-img {
-    /* width: 100%;
-    height: 100%; */
-    object-fit: cover;
-}
 
 /* ------------------------------------------------------------------
                     ***    modules modal Style        ***
@@ -77,8 +15,19 @@ img {
     position: relative;
     height: 100vh;
     transition: all 0.5s ease-in-out;
-    opacity: 1;
-    visibility: visible;
+
+    animation: paperSearch ease-in-out 1.5s;
+}
+
+@keyframes paperSearch {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 .modal-hidden {
