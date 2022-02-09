@@ -354,17 +354,21 @@ const decrement = (i) => {
 
 // Filter Products
 filter.addEventListener("click", () => {
-    filterProduct(
-        filter.options[filter.selectedIndex].value,
-        getProducts("products")
+    render(
+        filterProduct(
+            filter.options[filter.selectedIndex].value,
+            getProducts("products")
+        )
     );
 });
 
 // Sort Products
 sort.addEventListener("click", () => {
-    sortProduct(
-        sort.options[sort.selectedIndex].value,
-        getProducts("products")
+    render(
+        sortProduct(
+            sort.options[sort.selectedIndex].value,
+            getProducts("products")
+        )
     );
 });
 
