@@ -7,8 +7,33 @@ const btnCloseCart = document.getElementById("btn-close-cart");
 const btnShowCart = document.getElementById("btn-shopping-bag");
 const modalCreateProduct = getElement("modal-create-product");
 const btnCloseProductModal = getElement("close-product-modal");
-const btnAddProduct = getElement("btnAddProduct");
 const modalProductOverview = getElement("modal-product-overview");
+const btnAddProduct = document.getElementById("btnAddProduct");
+const btnBuyer = document.querySelector(".btn-modal-buyer");
+const btnSeller = document.querySelector(".btn-modal-seller");
+let isBuyer = true;
+
+// add event listener to buyer and seller buttons
+btnBuyer.addEventListener("click", () => {
+    userTyper(true);
+});
+btnSeller.addEventListener("click", () => {
+    userTyper(false);
+});
+
+// Function to check if the user buyer or seller
+function userTyper(isABuyer) {
+    isBuyer = isABuyer;
+    modalStarter.style.display = "none";
+}
+
+// Show modalStarter popup;
+if (localStorage.getItem("popState") !== "shown") {
+    window.addEventListener("load", function () {
+        modalStarter.style.display = "flex";
+        localStorage.setItem("popState", "shown");
+    });
+}
 
 //Import data from JSON files
 let fetchData = () => {
@@ -79,4 +104,79 @@ function hasProduct(productList) {
         return false;
     }
     return true;
+}
+
+// Function to Render Products at home page
+function render(productList) {
+    if (hasProduct(productList)) {
+        let order = 0;
+        let listProducts = document.querySelector(".product-list");
+
+        productList.forEach((product) => {
+            let list = document.createElement("li");
+            let wrapImg = document.createElement("div");
+            wrapImg.className = "wrap-img";
+            let infoProduct = document.createElement("div");
+            infoProduct.className = "info-product";
+
+            let imgProduct = document.createElement("img");
+            imgProduct.className = "img";
+            imgProduct.setAttribute("src", product.image);
+            let category = document.createElement("div");
+            category.innerText = product.category;
+            category.className = "category";
+
+            let edit = document.createElement("div");
+            let iconForEdit = document.createElement("i");
+
+            if (!isBuyer) {
+                edit.setAttribute("data-index", order);
+                edit.className = "edit";
+                edit.addEventListener("click", () => editProductDom(product));
+                iconForEdit.className = "fa fa-pencil";
+                edit.appendChild(iconForEdit);
+                wrapImg.appendChild(edit);
+            }
+
+            let nameAndPrice = document.createElement("div");
+            nameAndPrice.className = "name-price";
+            let addCart = document.createElement("div");
+            addCart.setAttribute("data-index", order++);
+            addCart.className = "add-cart";
+
+            let iconForAdd = document.createElement("i");
+
+            if (isBuyer) {
+                addCart.addEventListener("click", () => addToCartDom(product));
+                iconForAdd.className = "far fa-cart-plus";
+            } else {
+                addCart.addEventListener("click", () =>
+                    deleteProductDom(product)
+                );
+                iconForAdd.className = "far fa-trash-alt";
+            }
+
+            let name = document.createElement("h3");
+            name.innerText = product.name;
+            name.className = "name";
+            let price = document.createElement("p");
+            price.innerText = `$${product.price}`;
+            price.className = "price";
+
+            addCart.appendChild(iconForAdd);
+            nameAndPrice.appendChild(name);
+            nameAndPrice.appendChild(price);
+
+            wrapImg.appendChild(category);
+            wrapImg.appendChild(imgProduct);
+
+            infoProduct.appendChild(nameAndPrice);
+            infoProduct.appendChild(addCart);
+
+            list.appendChild(wrapImg);
+            list.appendChild(infoProduct);
+
+            listProducts.insertBefore(list, listProducts.childNodes[0]);
+        });
+    }
 }
