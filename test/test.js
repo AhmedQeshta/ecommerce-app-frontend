@@ -9,7 +9,7 @@ const {
     convertToObject,
     convertArrayToString,
     convertStringArrayToArray,
-    checkFormData
+    checkFormData,
 } = require("../js/logic");
 
 describe("Test Add Products", () => {
@@ -295,50 +295,52 @@ describe("Sort Function", () => {
     });
 });
 
-
 // ----------- Test convert data product to object -----------
 describe("Test convert data product to object", () => {
     test("Product should be object", () => {
-        let imgLink = "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80";
+        let imgLink =
+            "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1372&q=80";
         let expected = {
-            id:15,
-            name:"name",
-            price:150.15,
-            category:"Clothes",
-            image:imgLink
-        }
-        expect(convertToObject(15,"name",150.15,"Clothes",imgLink)).toEqual(expected);
+            id: 15,
+            name: "name",
+            price: 150.15,
+            category: "Clothes",
+            image: imgLink,
+        };
+        expect(convertToObject(15, "name", 150.15, "Clothes", imgLink)).toEqual(
+            expected
+        );
     });
 });
 
 // ----------- Test convert array product to string -----------
 describe("Test convert array product to string", () => {
     test("Array Product should be string", () => {
-        let array = [1,2,3];
+        let array = [1, 2, 3];
         let expected = "[1,2,3]";
         expect(convertArrayToString(array)).toEqual(expected);
-        
     });
 });
 
 // ----------- Test convert stringArray product to Array -----------
 describe("Test convert stringArray product to Array", () => {
     test("stringArray Product should be Array", () => {
-        let array =  "[1,2,3]";
-        let expected = [1,2,3];
+        let array = "[1,2,3]";
+        let expected = [1, 2, 3];
         expect(convertStringArrayToArray(array)).toEqual(expected);
-        
     });
 });
 
 // ----------- Test  Check Form Data -----------
 describe("Test  Check Form Data", () => {
     test("Check Form Data is Valid", () => {
-        expect(checkFormData('name', 'price', 'category', 'image')).toBeTruthy();
-        expect(checkFormData('name', 'price', 'category', '')).toBeFalsy();
-        expect(checkFormData('name', 'price', '', 'image')).toBeFalsy();
-        expect(checkFormData('name', '', 'category', 'image')).toBeFalsy();
-        expect(checkFormData('', 'price', 'category', 'image')).toBeFalsy();
-        expect(checkFormData('', '', '', '')).toBeFalsy();
+        expect(
+            checkFormData("name", "price", "category", "image")
+        ).toBeTruthy();
+        expect(checkFormData("name", "price", "category", "")).toBeFalsy();
+        expect(checkFormData("name", "price", "", "image")).toBeFalsy();
+        expect(checkFormData("name", "", "category", "image")).toBeFalsy();
+        expect(checkFormData("", "price", "category", "image")).toBeFalsy();
+        expect(checkFormData("", "", "", "")).toBeFalsy();
     });
 });

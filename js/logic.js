@@ -128,33 +128,30 @@ const convertToObject = (id, name, price, category, image) => {
 };
 
 // ------ *** --------       Convert array to String        -------- *** --------
-const convertArrayToString = (array)=>{
-    return JSON.stringify(array)
- }
+const convertArrayToString = (array) => {
+    return JSON.stringify(array);
+};
 
- // ------ *** --------      Reverse Convert array to String        -------- *** --------
- const convertStringArrayToArray = (stringArray)=>{
-    return JSON.parse(stringArray)
- }
+// ------ *** --------      Reverse Convert array to String        -------- *** --------
+const convertStringArrayToArray = (stringArray) => {
+    return JSON.parse(stringArray);
+};
 
 // ------ *** --------  Function Save data in local storage      -------- *** --------
-const storeArrayDataOf = (nameLocalStorage,products)=>{
-    localStorage.setItem(nameLocalStorage,products)
-}
-
+const storeArrayDataOf = (nameLocalStorage, products) => {
+    localStorage.setItem(nameLocalStorage, products);
+};
 
 // ------ *** --------        Check Form Data            -------- *** --------
 const checkFormData = (name, price, category, image) => {
     let isValid = false;
-    if(name === '' || price ===''|| category ===''||image ===''){
+    if (name === "" || price === "" || category === "" || image === "") {
         isValid = false;
-    }else{
+    } else {
         isValid = true;
     }
     return isValid;
 };
-
-
 
 if (typeof module !== "undefined") {
     module.exports = {
@@ -168,6 +165,6 @@ if (typeof module !== "undefined") {
         convertToObject,
         convertArrayToString,
         convertStringArrayToArray,
-        checkFormData
+        checkFormData,
     };
 }
