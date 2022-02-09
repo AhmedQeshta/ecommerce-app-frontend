@@ -16,6 +16,8 @@ const cartContent = document.querySelector(".content-cart");
 const minusBtn = document.querySelector(".minus");
 const plusBtn = document.querySelector(".plus");
 const removeAll = document.querySelector(".remove-all");
+const btnBuyerMain = document.querySelector(".btn-buyer");
+const btnSellerMain = document.querySelector(".btn-seller");
 const productName = getElement("name");
 const productCategory = getElement("category");
 const productPrice = getElement("product-price");
@@ -27,10 +29,34 @@ let isBuyer = true;
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
+    btnSellerMain.classList.remove("btn-active");
+    btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
     userTyper(true);
+    getProducts("products");
 });
 btnSeller.addEventListener("click", () => {
+    btnBuyerMain.classList.remove("btn-active");
+    btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
     userTyper(false);
+    getProducts("products");
+});
+
+btnBuyerMain.addEventListener("click", () => {
+    btnSellerMain.classList.remove("btn-active");
+    btnBuyerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'none'
+    userTyper(true);
+    getProducts("products");
+});
+
+btnSellerMain.addEventListener("click", () => {
+    btnBuyerMain.classList.remove("btn-active");
+    btnSellerMain.classList.add("btn-active");
+    btnAddProduct.style.display = 'block'
+    userTyper(false);
+    getProducts("products");
 });
 
 // Function to check if the user buyer or seller
@@ -100,7 +126,6 @@ function getElement(idName) {
 }
 
 // --------------- Function to add Product ------------------
-
 
 btnSubmitFormProduct.addEventListener("click", () =>
     SubmitFormToCreateProduct()
@@ -247,10 +272,10 @@ function render(productList) {
 }
 
 // function for render items in cart content
-const renderCart = () => {
-    if (hasProduct(cartItems)) {
-        cartItems.forEach((item) => {
-            cartContent.innerHTML += ` <div class="item">
+const renderCart= () => {
+    if(hasProduct(cartItems)) {
+        cartItems.forEach((item,i)=>{
+            cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
                 src="${item.image}"
                 alt="${item.name}"
@@ -264,11 +289,11 @@ const renderCart = () => {
                 </div>
                 <div class="data">
                     <div class="quentity">
-                        <button class="minus" >
+                        <button class="minus" onclick="decrement(${i})" >
                             <i class="far fa-minus"></i>
                         </button>
                         <span class="quantity-number">1</span>
-                        <button class="plus" >
+                        <button class="plus" onclick="increment(${i})" >
                             <i class="far fa-plus"></i>
                         </button>
                     </div>
@@ -281,7 +306,7 @@ const renderCart = () => {
         cartContent.innerHTML = "There is no items yet";
     }
 };
-
+postProducts("cartItems", cartItems);
 renderCart();
 // Function Check if the product list has a product
 function hasProduct(productList) {
@@ -294,11 +319,52 @@ function hasProduct(productList) {
     }
     return true;
 }
+//remove all items from cart and from local storage
+removeAll.addEventListener('click',()=>{
+    cartItems = []
+    postProducts('cartItems',cartItems)
+})
+//increment quantity function 
+const increment = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    quantity.textContent =  parseInt(quantity.textContent) + 1 ;
+    totalPrice()
+}
+//decrement quantity function 
+const decrement = (i) => {
+    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
+    if (parseInt(quantity.textContent) ===1) {
+        quantity.textContent =1
+    }
+    else {
+        quantity.textContent =  parseInt(quantity.textContent) -1
+    }
+    totalPrice()
+  
+}
 
-removeAll.addEventListener("click", () => {
-    cartItems = [];
-    postProducts("cartItems", cartItems);
-});
+const totalPrice = () =>{
+    let items = document.querySelectorAll('.item')
+    console.log(items)
+    let total= document.getElementById('total-number')
+    // console.log(total)
+    let sum = 0
+   for (let i =0 ; i<items.length;i++){
+       let item=items[i]
+        let priceElement = item.querySelector('.price-item')
+        console.log(priceElement)
+        let quantity =item.querySelector('.quantity-number').textContent
+        console.log(quantity)
+        let price = priceElement.textContent;
+         price=parseFloat(price.replace('$',''))
+         sum = sum+(price*quantity) 
+    }
+    total.innerText=sum.toFixed(2) +"$"
+    postProducts("total", sum);
+
+}
+totalPrice()
+
 
 postProducts("cartItems", cartItems);
 renderCart();
