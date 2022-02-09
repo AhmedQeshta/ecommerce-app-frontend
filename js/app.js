@@ -409,6 +409,8 @@ removeAll.addEventListener("click", () => {
     cartItems = [];
     postProducts("cartItems", cartItems);
     renderCart(getProducts("cartItems"));
+    totalPrice()
+    lengthItems()
 });
 
 // ------------------------ *** Function For delete product *** ------------------
