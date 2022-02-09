@@ -206,7 +206,7 @@ function render(productList) {
             let nameAndPrice = document.createElement("div");
             nameAndPrice.className = "name-price";
             let addCart = document.createElement("div");
-            addCart.setAttribute("data-index", order++);
+            addCart.setAttribute("data-index",  order);
             addCart.className = "add-cart";
 
             let iconForAdd = document.createElement("i");
@@ -216,7 +216,7 @@ function render(productList) {
                 iconForAdd.className = "far fa-cart-plus";
             } else {
                 addCart.addEventListener("click", () =>
-                    deleteProductDom(product)
+                    deleteProductDom(product,newListProducts.indexof(product))
                 );
                 iconForAdd.className = "far fa-trash-alt";
             }
@@ -308,3 +308,13 @@ removeAll.addEventListener("click", () => {
     cartItems = [];
     postProducts("cartItems", cartItems);
 });
+
+
+
+// ------------------------ *** Function For delete product *** ------------------
+const deleteProductDom = (object,indexProduct) => {
+
+
+        // ------ *** --------   Refresh dom to render dom       -------- *** --------
+        getProducts("product");
+};
