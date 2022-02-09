@@ -10,6 +10,8 @@ const modalCreateProduct = getElement("modal-create-product");
 const btnCloseProductModal = getElement("close-product-modal");
 const modalProductOverview = getElement("modal-product-overview");
 const btnAddProduct = document.getElementById("btnAddProduct");
+const sort = document.getElementById("sort");
+const filter = document.getElementById("filter");
 const btnBuyer = document.querySelector(".btn-modal-buyer");
 const btnSeller = document.querySelector(".btn-modal-seller");
 const cartContent = document.querySelector(".content-cart");
@@ -24,21 +26,25 @@ const productPrice = getElement("product-price");
 const productImageUrl = getElement("image-url");
 const btnSubmitFormProduct = getElement("btn-submit-form-product");
 
+let productsList;
 let cartItems = [];
 let isBuyer = true;
+
+productsList = getProducts("products");
+render(products);
 
 // add event listener to buyer and seller buttons
 btnBuyer.addEventListener("click", () => {
     btnSellerMain.classList.remove("btn-active");
     btnBuyerMain.classList.add("btn-active");
-    btnAddProduct.style.display = 'none'
+    btnAddProduct.style.display = "none";
     userTyper(true);
     getProducts("products");
 });
 btnSeller.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
-    btnAddProduct.style.display = 'block'
+    btnAddProduct.style.display = "block";
     userTyper(false);
     getProducts("products");
 });
@@ -46,7 +52,7 @@ btnSeller.addEventListener("click", () => {
 btnBuyerMain.addEventListener("click", () => {
     btnSellerMain.classList.remove("btn-active");
     btnBuyerMain.classList.add("btn-active");
-    btnAddProduct.style.display = 'none'
+    btnAddProduct.style.display = "none";
     userTyper(true);
     getProducts("products");
 });
@@ -54,7 +60,7 @@ btnBuyerMain.addEventListener("click", () => {
 btnSellerMain.addEventListener("click", () => {
     btnBuyerMain.classList.remove("btn-active");
     btnSellerMain.classList.add("btn-active");
-    btnAddProduct.style.display = 'block'
+    btnAddProduct.style.display = "block";
     userTyper(false);
     getProducts("products");
 });
@@ -101,7 +107,6 @@ function getProducts(key) {
         localStorage.getItem(key) === null
             ? []
             : JSON.parse(localStorage.getItem(key));
-    render(data);
     return data;
 }
 
@@ -280,9 +285,9 @@ function render(productList) {
 }
 
 // function for render items in cart content
-const renderCart= () => {
-    if(hasProduct(cartItems)) {
-        cartItems.forEach((item,i)=>{
+const renderCart = () => {
+    if (hasProduct(cartItems)) {
+        cartItems.forEach((item, i) => {
             cartContent.innerHTML += ` <div class="item" id="index-${i}">
             <img
                 src="${item.image}"
@@ -328,24 +333,42 @@ function hasProduct(productList) {
     return true;
 }
 //remove all items from cart and from local storage
-removeAll.addEventListener('click',()=>{
-    cartItems = []
-    postProducts('cartItems',cartItems)
-})
-//increment quantity function 
+removeAll.addEventListener("click", () => {
+    cartItems = [];
+    postProducts("cartItems", cartItems);
+});
+//increment quantity function
 const increment = (i) => {
-    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
-    quantity.textContent =  parseInt(quantity.textContent) + 1
-}
-//decrement quantity function 
+    let quantity = document.getElementById(`index-${i}`).childNodes[3]
+        .childNodes[3].childNodes[1].childNodes[3];
+    quantity.textContent = parseInt(quantity.textContent) + 1;
+};
+//decrement quantity function
 const decrement = (i) => {
-    let quantity =document.getElementById(`index-${i}`).childNodes[3].childNodes[3].childNodes[1].childNodes[3]
-    if (parseInt(quantity.textContent) ===1) {
-        quantity.textContent =1
+    let quantity = document.getElementById(`index-${i}`).childNodes[3]
+        .childNodes[3].childNodes[1].childNodes[3];
+    if (parseInt(quantity.textContent) === 1) {
+        quantity.textContent = 1;
+    } else {
+        quantity.textContent = parseInt(quantity.textContent) - 1;
     }
-    else {
-        quantity.textContent =  parseInt(quantity.textContent) -1
-    }
-  
-}
+};
 
+// Filter Products
+filter.addEventListener("click", () => {
+    filterProduct(
+        filter.options[filter.selectedIndex].value,
+        getProducts("products")
+    );
+});
+
+// Sort Products
+sort.addEventListener("click", () => {
+    sortProduct(
+        sort.options[sort.selectedIndex].value,
+        getProducts("products")
+    );
+});
+
+// Get Products when the user reload the page
+window.onload = getProducts("products");

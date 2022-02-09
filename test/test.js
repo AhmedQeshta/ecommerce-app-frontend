@@ -175,6 +175,22 @@ describe("Test search Product function", () => {
 describe("Filter Function", () => {
     test("should return array with clothes cateogre products", () => {
         const nameCategory = "clothing";
+        let products = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "second",
+                price: 20,
+                category: "Games",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
         const filteredList = [
             {
                 id: 1,
@@ -184,7 +200,7 @@ describe("Filter Function", () => {
                 image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
             },
         ];
-        expect(filterProduct(nameCategory)).toEqual(filteredList);
+        expect(filterProduct(nameCategory, products)).toEqual(filteredList);
     });
 
     test("should return the same array without any change", () => {
@@ -205,13 +221,36 @@ describe("Filter Function", () => {
                 image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
             },
         ];
-        expect(filterProduct(nameCategory)).toEqual(products);
+        expect(filterProduct(nameCategory, products)).toEqual(products);
     });
 });
 
 describe("Sort Function", () => {
     test("should order the products by maximum price", () => {
         const sortType = "Minimum";
+        const products = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
         const sortedList = [
             {
                 id: 1,
@@ -235,11 +274,34 @@ describe("Sort Function", () => {
                 image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
             },
         ];
-        expect(sortProduct(sortType)).toEqual(sortedList);
+        expect(sortProduct(sortType, products)).toEqual(sortedList);
     });
 
     test("should order the products by minimum price", () => {
         const sortType = "Maximum";
+        const products = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
         const sortedList = [
             {
                 id: 2,
@@ -263,11 +325,34 @@ describe("Sort Function", () => {
                 image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
             },
         ];
-        expect(sortProduct(sortType)).toEqual(sortedList);
+        expect(sortProduct(sortType, products)).toEqual(sortedList);
     });
 
     test("should return the array as it", () => {
         const sortType = "None";
+        const products = [
+            {
+                id: 1,
+                name: "first",
+                price: 10.15,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 2,
+                name: "first",
+                price: 20,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+            {
+                id: 3,
+                name: "first",
+                price: 15.2,
+                category: "clothing",
+                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+            },
+        ];
         const sortProductList = [
             {
                 id: 1,
@@ -291,7 +376,7 @@ describe("Sort Function", () => {
                 image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
             },
         ];
-        expect(sortProduct(sortType)).toEqual(sortProductList);
+        expect(sortProduct(sortType, products)).toEqual(sortProductList);
     });
 });
 
