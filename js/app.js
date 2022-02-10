@@ -28,6 +28,7 @@ const btnSubmitFormProduct = document.getElementById("btn-submit-form-product");
 const numberItems =document.querySelector('.number-items')
 const numberNavbar =document.querySelector('.count-cart')
 const addProductTitle = document.getElementById("add-product-title");
+let empty = document.querySelector('.empty')
 
 let isCreate = true;
 let INDEX_PRODUCT_GLOBAL;
@@ -106,10 +107,6 @@ function postProducts(key, data) {
 
 // Function get Products from localStorage
 function getProducts(key) {
-    // data =
-    //     localStorage.getItem(key) === null
-    //         ? []
-    //         : JSON.parse(localStorage.getItem(key));
     data =
         localStorage.getItem(key) == undefined
             ? []
@@ -207,9 +204,9 @@ const cleanInputForm = () => {
 // Function Check if the product list has a product
 function hasProduct(productList) {
     if (
-        productList.length == 0 ||
-        productList == undefined ||
-        productList == null
+        productsList.length == 0 ||
+        productsList === undefined ||
+        productsList === null
     ) {
         return false;
     }
@@ -219,10 +216,11 @@ function hasProduct(productList) {
 // Function to Render Products at home page
 function render(productList) {
     if (hasProduct(productList)) {
-        let order = 0;
+        empty.style.display = "none"
+
         let listProducts = document.querySelector(".product-list");
         listProducts.innerHTML = "";
-        productList.forEach((product) => {
+        productList.forEach((product, index) => {
             let list = document.createElement("li");
             let wrapImg = document.createElement("div");
             wrapImg.className = "wrap-img";
@@ -240,10 +238,10 @@ function render(productList) {
             let iconForEdit = document.createElement("i");
 
             if (!isBuyer) {
-                edit.setAttribute("data-index", order);
+                edit.setAttribute("data-index", index);
                 edit.className = "edit";
                 edit.addEventListener("click", () =>
-                    editProductDom(product, order++)
+                    editProductDom(product, index)
                 );
                 iconForEdit.className = "fa fa-pencil";
                 edit.appendChild(iconForEdit);
@@ -253,7 +251,7 @@ function render(productList) {
             let nameAndPrice = document.createElement("div");
             nameAndPrice.className = "name-price";
             let addCart = document.createElement("div");
-            addCart.setAttribute("data-index", order);
+            addCart.setAttribute("data-index", index);
             addCart.className = "add-cart";
 
             let iconForAdd = document.createElement("i");
@@ -263,7 +261,7 @@ function render(productList) {
                 iconForAdd.className = "far fa-cart-plus";
             } else {
                 addCart.addEventListener("click", () =>
-                    deleteProductDom(product, order++)
+                    deleteProductDom(product, index)
                 );
                 iconForAdd.className = "far fa-trash-alt";
             }
@@ -290,6 +288,8 @@ function render(productList) {
 
             listProducts.insertBefore(list, listProducts.childNodes[0]);
         });
+    }else{
+        empty.style.display = "flex"
     }
 }
 
@@ -329,22 +329,7 @@ function renderCart(cartItems) {
         cartContent.innerHTML = "There is no items yet";
     }
 }
-// Function Check if the product list has a product
-function hasProduct(productList) {
-    if (
-        productList.length == 0 ||
-        productList == undefined ||
-        productList == null
-    ) {
-        return false;
-    }
-    return true;
-}
-//remove all items from cart and from local storage
-removeAll.addEventListener("click", () => {
-    cartItems = [];
-    postProducts("cartItems", cartItems);
-});
+
 //increment quantity function
 const increment = (i) => {
     let quantity = document.getElementById(`index-${i}`).childNodes[3]
@@ -362,6 +347,7 @@ const decrement = (i) => {
     } else {
         quantity.textContent = parseInt(quantity.textContent) - 1;
     }
+    totalPrice();
 };
 
 // Filter Products
@@ -401,9 +387,6 @@ const totalPrice = () => {
 };
 totalPrice();
 
-// postProducts("cartItems", cartItems);
-// renderCart(cartItems);
-
 // Remove all product from cart
 removeAll.addEventListener("click", () => {
     cartItems = [];
@@ -416,6 +399,7 @@ removeAll.addEventListener("click", () => {
 // ------------------------ *** Function For delete product *** ------------------
 function deleteProductDom(object, indexProduct) {
     // For delete product form array
+    productsList = getProducts("products");
     productsList.splice(indexProduct, 1);
 
     // ------ *** --------   Save data in local storage      -------- *** --------

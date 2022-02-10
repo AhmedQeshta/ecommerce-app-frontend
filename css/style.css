@@ -505,6 +505,18 @@ main{
     font-weight: 700;
 }
 
+.empty{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.emptyText{
+    font-size: 30px;
+    color: var(--primary);
+}
+
 @media (max-width: 1440px) {
     .product-list {
         grid-template-columns: repeat(4, 1fr);
